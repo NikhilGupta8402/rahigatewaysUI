@@ -1,0 +1,57 @@
+<header class="app-header">
+  <div class="header-inner">
+    <!-- Left: logo + search -->
+    <div class="header-left">
+      <a class="logo" href="#">
+        <img src="assets/images/logo.png" alt="Rahi Gateways" />
+      </a>
+
+      <div class="search-box">
+        <i class="ri-search-line"></i>
+        <img src="assets/images/search-icon.png" alt="Search Icon" />
+        <input
+          type="text"
+          placeholder="Search destinations or activities"
+        />
+      </div>
+    </div>
+
+    <!-- Center: nav (desktop) -->
+    <nav class="header-nav">
+      <a class="nav-link active" href="#">Home</a>
+      <a class="nav-link" href="#">About Us</a>
+      <a class="nav-link" href="#">Activities</a>
+      <a class="nav-link" href="#">Contact</a>
+    </nav>
+
+    <!-- Right: WhatsApp + hamburger -->
+    <div class="header-right">
+      <div class="whatsapp-chip">
+        <i class="ri-whatsapp-line"></i>
+        <img src="assets/images/whatsapp-icon.png" alt="India Flag" />
+        <span>+91 9981231212</span>
+      </div>
+
+      <!-- hamburger (shown only on mobile via CSS) -->
+      <button class="menu-toggle" (click)="toggleMenu()">
+        <i class="ri-menu-line" *ngIf="!isMenuOpen"></i>
+        <i class="ri-close-line" *ngIf="isMenuOpen"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Backdrop -->
+  <div
+    class="mobile-menu-backdrop"
+    *ngIf="isMenuOpen"
+    (click)="closeMenu()"
+  ></div>
+
+  <!-- Sidebar -->
+  <nav class="mobile-menu" [class.open]="isMenuOpen">
+    <a class="mobile-link active" href="#" (click)="closeMenu()">Home</a>
+    <a class="mobile-link" href="#" (click)="closeMenu()">About Us</a>
+    <a class="mobile-link" href="#" (click)="closeMenu()">Activities</a>
+    <a class="mobile-link" href="#" (click)="closeMenu()">Contact</a>
+  </nav>
+</header>

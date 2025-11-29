@@ -1,0 +1,5 @@
+.app-main {
+  min-height: 100vh;
+  padding-top: 100px;   /* header height *//* footer height – adjust if needed */
+  background: #ffffff;
+}

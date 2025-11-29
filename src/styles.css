@@ -1,1 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
+/* Google font – optional but recommended */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+:root {
+  --primary: #2b7600;     /* Primary */
+  --secondary: #173404;   /* secondery */
+  --text-muted: #79747e;
+  --border-soft: #e7e8e7;
+  --bg-soft: #f9fff6;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  background: #ffffff;
+  color: #111827;
+}
