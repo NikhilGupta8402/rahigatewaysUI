@@ -1,11 +1,14 @@
+/* ============= FOOTER STYLES ============= */
+
 .footer {
   position: relative;
   background: #173404;
   color: #f9fafb;
-  padding: 4rem 0 2rem;     /* Increased vertical padding for more height */
+  padding: 4rem 0 3.5rem;
   overflow: hidden;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* Skyline background */
@@ -16,106 +19,336 @@
   background-image: url("/assets/images/footer-skyline.png");
   background-repeat: no-repeat;
   background-position: center bottom;
-  background-size: contain;
-  opacity: 1;
+  background-size: cover;
   pointer-events: none;
+  z-index: 0;
 }
 
-/* Center container (controls the left and right gap) */
+/* Center container */
 .footer-inner {
   position: relative;
-  width: 86%;               /* Makes it centered but leaves 7% gap on both sides */
-  max-width: 1300px;       /* Increased width for more stretchy desktop layout */
-  padding: 0 2rem;         /* Inner padding so content won’t touch edges */
+  width: 90%;
+  max-width: 1300px;
+  padding: 0 2rem;
   display: grid;
   grid-template-columns: 2.3fr 1fr 1fr 1.2fr;
-  gap: 3rem;               /* More spacing between columns */
-  border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+  gap: 3rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
   padding-bottom: 2rem;
+  z-index: 1;
 }
 
-/* Brand text */
+/* Brand column */
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
 .footer-brand h3 {
-  font-size: 2.3rem;
+  font-size: 2rem;
   font-weight: 700;
-  margin-bottom: 0.6rem;
-}
-
-.footer-brand p {
-  font-size: 1rem;
-  color: #e5e7eb;
-  line-height: 1.6;
-  max-width: 410px;
-}
-
-/* Column headings */
-.footer-col h4 {
-  font-size: 1.1rem;
-  font-weight: 650;
-  margin-bottom: 1rem;
+  margin: 0;
   color: #ffffff;
 }
 
-/* Links and text */
-/* Make each footer column a vertical stack */
+.footer-brand p {
+  font-size: 0.9375rem;
+  color: #d1d5db;
+  line-height: 1.6;
+  max-width: 380px;
+  margin: 0;
+}
+
+/* Footer columns */
 .footer-col {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 0.4rem;              /* space between links/text */
+  gap: 0.625rem;
 }
 
-/* keep existing styles but you can tweak sizes a bit */
 .footer-col h4 {
-  font-size: 1.05rem;
+  font-size: 1.0625rem;
   font-weight: 650;
-  margin-bottom: 0.6rem;
+  margin: 0 0 0.5rem 0;
+  color: #ffffff;
 }
 
-.footer-col a,
-.footer-col p {
+.footer-col a {
   display: block;
-  font-size: 0.96rem;
+  font-size: 0.9375rem;
   color: #d1d5db;
   text-decoration: none;
+  transition: color 0.2s ease;
+  line-height: 1.5;
 }
+
 .footer-col a:hover {
   color: #10b981;
 }
 
-/* Copyright bottom text */
-.footer-bottom {
-  position: absolute;
-  bottom: 12px;
-  width: 100%;
-  text-align: center;
-  font-size: 1rem;
-  color: #9ca3af;
+.footer-col p {
+  font-size: 0.9375rem;
+  color: #d1d5db;
+  margin: 0;
+  line-height: 1.6;
 }
 
-/* Responsive */
-@media (max-width: 960px) {
+/* Copyright bottom text */
+.footer-bottom {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  font-size: 0.875rem;
+  color: #9ca3af;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  z-index: 1;
+}
+
+/* ============= RESPONSIVE ============= */
+
+/* Large Desktop */
+@media (max-width: 1200px) {
   .footer-inner {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2.2rem;
+    grid-template-columns: 2fr 1fr 1fr 1.2fr;
+    gap: 2.5rem;
+    width: 92%;
+    padding: 0 1.5rem;
+  }
+
+  .footer-brand h3 {
+    font-size: 1.875rem;
+  }
+
+  .footer-brand p {
+    max-width: 340px;
   }
 }
 
+/* Tablet */
+@media (max-width: 992px) {
+  .footer {
+    padding: 3rem 0 3rem;
+  }
+
+  .footer-inner {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem 2rem;
+    width: 95%;
+    padding: 0 1.25rem;
+    padding-bottom: 1.75rem;
+  }
+
+  .footer-brand {
+    grid-column: 1 / -1;
+  }
+
+  .footer-brand h3 {
+    font-size: 1.75rem;
+  }
+
+  .footer-brand p {
+    max-width: 500px;
+    font-size: 0.875rem;
+  }
+
+  .footer-col h4 {
+    font-size: 1rem;
+  }
+
+  .footer-col a,
+  .footer-col p {
+    font-size: 0.875rem;
+  }
+
+  .footer-bottom {
+    margin-top: 1.75rem;
+    padding-top: 1.25rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .footer {
+    padding: 2.5rem 0 2.5rem;
+  }
+
+  .footer-inner {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem 1.5rem;
+    width: 100%;
+    padding: 0 1rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .footer-brand {
+    grid-column: 1 / -1;
+    gap: 0.5rem;
+  }
+
+  .footer-brand h3 {
+    font-size: 1.625rem;
+  }
+
+  .footer-brand p {
+    max-width: 100%;
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+
+  .footer-col {
+    gap: 0.5rem;
+  }
+
+  .footer-col h4 {
+    font-size: 0.9375rem;
+    margin-bottom: 0.375rem;
+  }
+
+  .footer-col a,
+  .footer-col p {
+    font-size: 0.8125rem;
+  }
+
+  .footer-bottom {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    font-size: 0.8125rem;
+  }
+
+  /* Skyline adjustment for mobile */
+  .footer::before {
+    background-size: cover;
+  }
+}
+
+/* Small Mobile */
 @media (max-width: 640px) {
   .footer {
-    padding: 3rem 1.5rem 1.8rem;
+    padding: 2rem 0 2rem;
   }
 
   .footer-inner {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 1.75rem;
+    padding: 0 1rem;
+    padding-bottom: 1.25rem;
+  }
+
+  .footer-brand {
+    grid-column: 1;
+    gap: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   .footer-brand h3 {
-    font-size: 1.85rem;
+    font-size: 1.5rem;
   }
 
   .footer-brand p {
-    max-width: none;
+    font-size: 0.8125rem;
+    line-height: 1.5;
+  }
+
+  .footer-col {
+    gap: 0.5rem;
+  }
+
+  .footer-col h4 {
+    font-size: 0.9375rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .footer-col a,
+  .footer-col p {
+    font-size: 0.8125rem;
+    line-height: 1.5;
+  }
+
+  .footer-bottom {
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+    font-size: 0.75rem;
+  }
+}
+
+/* Extra Small Mobile */
+@media (max-width: 480px) {
+  .footer {
+    padding: 1.75rem 0 1.75rem;
+  }
+
+  .footer-inner {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 0 0.875rem;
+    padding-bottom: 1rem;
+  }
+
+  .footer-brand h3 {
+    font-size: 1.375rem;
+  }
+
+  .footer-brand p {
+    font-size: 0.8125rem;
+  }
+
+  .footer-col h4 {
+    font-size: 0.875rem;
+  }
+
+  .footer-col a,
+  .footer-col p {
+    font-size: 0.8125rem;
+  }
+
+  .footer-bottom {
+    margin-top: 1rem;
+    padding-top: 0.875rem;
+    font-size: 0.75rem;
+    line-height: 1.4;
+  }
+
+  /* Further reduce skyline opacity on very small screens */
+  .footer::before {
+    opacity: 0.08;
+  }
+}
+
+/* Extra Extra Small Mobile */
+@media (max-width: 360px) {
+  .footer {
+    padding: 1.5rem 0 1.5rem;
+  }
+
+  .footer-inner {
+    padding: 0 0.75rem;
+    padding-bottom: 1rem;
+    gap: 1.25rem;
+  }
+
+  .footer-brand h3 {
+    font-size: 1.25rem;
+  }
+
+  .footer-brand p {
+    font-size: 0.75rem;
+  }
+
+  .footer-col h4 {
+    font-size: 0.8125rem;
+  }
+
+  .footer-col a,
+  .footer-col p {
+    font-size: 0.75rem;
+  }
+
+  .footer-bottom {
+    font-size: 0.6875rem;
   }
 }

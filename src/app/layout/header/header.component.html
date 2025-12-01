@@ -8,35 +8,34 @@
 
       <div class="search-box">
         <i class="ri-search-line"></i>
-        <img src="assets/images/search-icon.png" alt="Search Icon" />
-        <input
-          type="text"
-          placeholder="Search destinations or activities"
-        />
+        <input type="text" placeholder="Search destinations" />
       </div>
     </div>
 
     <!-- Center: nav (desktop) -->
-    <nav class="header-nav">
+    <!-- <nav class="header-nav">
       <a class="nav-link active" href="#">Home</a>
       <a class="nav-link" href="#">About Us</a>
       <a class="nav-link" href="#">Activities</a>
       <a class="nav-link" href="#">Contact</a>
-    </nav>
+    </nav> -->
 
     <!-- Right: WhatsApp + hamburger -->
     <div class="header-right">
-      <div class="whatsapp-chip">
+      <a
+        href="https://wa.me/919355909328"
+        class="whatsapp-chip"
+        target="_blank"
+      >
         <i class="ri-whatsapp-line"></i>
-        <img src="assets/images/whatsapp-icon.png" alt="India Flag" />
-        <span>+91 9981231212</span>
-      </div>
+        <span>+91 9355909328</span>
+      </a>
 
-      <!-- hamburger (shown only on mobile via CSS) -->
-      <button class="menu-toggle" (click)="toggleMenu()">
+      <!-- Hamburger (tablet + mobile) -->
+      <!-- <button class="menu-toggle" (click)="toggleMenu()">
         <i class="ri-menu-line" *ngIf="!isMenuOpen"></i>
         <i class="ri-close-line" *ngIf="isMenuOpen"></i>
-      </button>
+      </button> -->
     </div>
   </div>
 
@@ -47,11 +46,21 @@
     (click)="closeMenu()"
   ></div>
 
-  <!-- Sidebar -->
-  <nav class="mobile-menu" [class.open]="isMenuOpen">
+  <!-- Mobile dropdown (full width) -->
+  <!-- <nav class="mobile-menu" [class.open]="isMenuOpen">
     <a class="mobile-link active" href="#" (click)="closeMenu()">Home</a>
     <a class="mobile-link" href="#" (click)="closeMenu()">About Us</a>
     <a class="mobile-link" href="#" (click)="closeMenu()">Activities</a>
     <a class="mobile-link" href="#" (click)="closeMenu()">Contact</a>
-  </nav>
+
+    <a
+      href="https://wa.me/919981231212"
+      class="mobile-whatsapp"
+      target="_blank"
+      (click)="closeMenu()"
+    >
+      <i class="ri-whatsapp-line"></i>
+      <span>WhatsApp Us</span>
+    </a>
+  </nav> -->
 </header>

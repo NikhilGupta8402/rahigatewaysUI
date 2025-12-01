@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 
 interface DestinationCard {
   title: string;
@@ -36,33 +36,33 @@ interface FaqItem {
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
-export class HomeComponent {
+export class HomeComponent implements AfterViewInit {
   specialOffers: DestinationCard[] = [
     {
       title: 'Goa (Private Party Access)',
       subtitle: 'Up to 10% Discount on Early Booking',
-      priceLabel: '₹25K / person',
+      priceLabel: '₹25K',
       ctaLabel: 'Book Now',
       imageUrl: 'assets/images/goa.png',
     },
     {
       title: 'Udaipur (Palace Stay, Dinner)',
       subtitle: 'Limited New Year Slots for Premium Experience',
-      priceLabel: '₹25K / person',
+      priceLabel: '₹25K',
       ctaLabel: 'Book Now',
       imageUrl: 'assets/images/udaipur.png',
     },
     {
       title: 'Mumbai (Snow Adventure)',
       subtitle: 'Exciting New Year Trips',
-      priceLabel: '₹25K / person',
+      priceLabel: '₹25K',
       ctaLabel: 'Book Now',
       imageUrl: 'assets/images/mumbai.png',
     },
     {
       title: 'Kochi (Carnival Parade Tour)',
       subtitle: 'Premium Experience for New Year',
-      priceLabel: '₹25K / person',
+      priceLabel: '₹25K',
       ctaLabel: 'Book Now',
       imageUrl: 'assets/images/kochi.png',
     },
@@ -72,35 +72,35 @@ export class HomeComponent {
     {
       title: 'Bali',
       subtitle: 'Private Beach Getaway',
-      priceLabel: '₹25K / person',
+      priceLabel: '₹25K',
       ctaLabel: 'Book Now',
       imageUrl: 'assets/images/bali.png',
     },
     {
       title: 'Thailand',
       subtitle: 'Party Spots & Quiet Retreats',
-      priceLabel: '₹25K / person',
+      priceLabel: '₹25K',
       ctaLabel: 'Book Now',
       imageUrl: 'assets/images/thailand.png',
     },
     {
       title: 'Dubai',
       subtitle: 'Skyline & Fireworks Views',
-      priceLabel: '₹25K / person',
+      priceLabel: '₹25K',
       ctaLabel: 'Book Now',
       imageUrl: 'assets/images/dubai.png',
     },
     {
       title: 'Maldives',
       subtitle: 'Underwater Dining Specials',
-      priceLabel: '₹25K / person',
+      priceLabel: '₹25K',
       ctaLabel: 'Book Now',
       imageUrl: 'assets/images/maldives.png',
     },
     {
       title: 'Singapore',
       subtitle: 'Marina Bay Lights Show',
-      priceLabel: '₹25K / person',
+      priceLabel: '₹25K',
       ctaLabel: 'Book Now',
       imageUrl: 'assets/images/singapore2.png',
     },
@@ -153,35 +153,35 @@ export class HomeComponent {
     {
       title: 'Goa',
       subtitle: 'Beach Resorts & EDM Parties',
-      priceLabel: '₹13K / person',
+      priceLabel: '₹13K',
       ctaLabel: 'Book Now',
       imageUrl: 'assets/images/goa2.png',
     },
     {
       title: 'Udaipur',
       subtitle: 'Palaces, Lakeside Dining',
-      priceLabel: '₹11K / person',
+      priceLabel: '₹11K',
       ctaLabel: 'Book Now',
       imageUrl: 'assets/images/udaipur2.png',
     },
     {
       title: 'Varanasi',
       subtitle: 'Ghats, Aarti & Morning Prayers',
-      priceLabel: '₹11K / person',
+      priceLabel: '₹11K',
       ctaLabel: 'Book Now',
       imageUrl: 'assets/images/varanasi.png',
     },
     {
       title: 'Manali',
       subtitle: 'Snowfall & Scenic Valleys',
-      priceLabel: '₹11K / person',
+      priceLabel: '₹11K',
       ctaLabel: 'Book Now',
       imageUrl: 'assets/images/manali.png',
     },
     {
       title: 'Andamans',
       subtitle: 'Coral Reefs & Scuba Diving Specials',
-      priceLabel: '₹11K / person',
+      priceLabel: '₹11K',
       ctaLabel: 'Book Now',
       imageUrl: 'assets/images/andamans.png',
     },
@@ -280,6 +280,25 @@ export class HomeComponent {
   indiaSlider!: ElementRef<HTMLDivElement>;
 
   // ... your existing arrays (specialOffers, internationalPackages, etc.)
+  @ViewChild('heroVideo') heroVideo!: ElementRef<HTMLVideoElement>;
+
+  constructor(private renderer: Renderer2) {}
+
+  ngAfterViewInit(): void {
+    const video = this.heroVideo.nativeElement;
+
+    // Set attributes using Renderer2
+    this.renderer.setAttribute(video, 'muted', 'true');
+    this.renderer.setAttribute(video, 'playsinline', '');
+    this.renderer.setProperty(video, 'muted', true);
+
+    // Play video
+    setTimeout(() => {
+      video.play().catch((err) => {
+        console.error('Autoplay failed:', err);
+      });
+    }, 100);
+  }
 
   scrollIntl(direction: number): void {
     if (!this.intlSlider) return;
@@ -315,9 +334,9 @@ export class HomeComponent {
     });
   }
 
-  openedFaqIndex: number | null = null; // 0 = first item open by default
+  openedFaqIndex: number | null = null;
 
-  toggleFaq(idx: number) {
-    this.openedFaqIndex = this.openedFaqIndex === idx ? null : idx;
+  toggleFaq(index: number): void {
+    this.openedFaqIndex = this.openedFaqIndex === index ? null : index;
   }
 }

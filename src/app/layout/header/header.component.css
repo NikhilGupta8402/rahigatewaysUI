@@ -1,3 +1,18 @@
+@import url("https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+/* ============= HEADER ============= */
+
 .app-header {
   position: fixed;
   top: 0;
@@ -6,47 +21,60 @@
   z-index: 100;
   background: #ffffff;
   border-bottom: 1px solid #e5e7eb;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
-/* main row */
 .header-inner {
   max-width: 1440px;
   margin: 0 auto;
   height: 100px;
-  padding: 0 17px;
+  padding: 0 2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 2rem;
 }
 
-/* left side: logo + search */
 .header-left {
   display: flex;
   align-items: center;
-  gap: 65px;
+  gap: 2rem;
+  flex: 1;
+  max-width: 600px;
+}
+
+.logo {
+  flex-shrink: 0;
 }
 
 .logo img {
-  height: 105px;
+  height: 60px;
   width: auto;
   display: block;
 }
 
-/* SEARCH BOX */
 .search-box {
   display: flex;
   align-items: center;
-  gap: 10px;
-  width: 420px;
-  padding: 10px 16px;
-  border-radius: 999px;
-  background: #f9fafb;
+  gap: 0.625rem;
+  flex: 1;
+  max-width: 350px;
+  padding: 0.625rem 1rem;
+  border-radius: 8px;
   border: 1px solid #e5e7eb;
+  background: #f9fafb;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.search-box:focus-within {
+  border-color: #2f9e44;
+  background: #ffffff;
 }
 
 .search-box i {
-  font-size: 18px;
+  font-size: 1.125rem;
   color: #9ca3af;
+  flex-shrink: 0;
 }
 
 .search-box input {
@@ -54,28 +82,38 @@
   outline: none;
   background: transparent;
   width: 100%;
-  font-size: 14px;
-  color: #6b7280;
+  font-size: 0.875rem;
+  color: #111827;
 }
 
-/* center nav (desktop) */
+.search-box input::placeholder {
+  color: #9ca3af;
+}
+
 .header-nav {
   display: flex;
   align-items: center;
-  gap: 40px;
+  gap: 2rem;
 }
 
 .nav-link {
-  font-size: 15px;
-  color: #111827;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: #374151;
   text-decoration: none;
   position: relative;
-  padding-bottom: 4px;
+  padding: 0.25rem 0;
+  transition: color 0.2s ease;
+  white-space: nowrap;
+}
+
+.nav-link:hover {
+  color: #2f9e44;
 }
 
 .nav-link.active {
   color: #2f9e44;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .nav-link.active::after {
@@ -83,139 +121,139 @@
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 0;
+  bottom: -2px;
   height: 2px;
   border-radius: 999px;
   background: #2f9e44;
 }
 
-/* right: WhatsApp + hamburger */
 .header-right {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 1rem;
 }
 
 .whatsapp-chip {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 14px;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  background: #f0fdf4;
+  font-size: 0.875rem;
   font-weight: 500;
-  color: #111827;
+  color: #166534;
+  text-decoration: none;
+  transition: background 0.2s ease;
+  white-space: nowrap;
 }
 
-.whatsapp-chip i {
-  font-size: 18px;
-  color: #25d366;
+.whatsapp-chip:hover {
+  background: #dcfce7;
 }
 
-/* hamburger (hidden on desktop) */
 .menu-toggle {
   display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
   border: none;
   background: transparent;
   cursor: pointer;
+  padding: 0;
 }
 
 .menu-toggle i {
-  font-size: 24px;
+  font-size: 1.5rem;
   color: #111827;
 }
 
-/* ============= MOBILE SIDEBAR ============= */
+/* ============= MOBILE MENU ============= */
 
 .mobile-menu-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(15, 23, 42, 0.35);
-  z-index: 95;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 98;
+  backdrop-filter: blur(2px);
 }
 
 .mobile-menu {
   position: fixed;
-  top: 130px; /* same as header height on desktop */
+  top: 100px;
+  left: 0;
   right: 0;
-  width: 260px;
-  height: calc(100vh - 130px);
+  width: 100%;
+  height: calc(100vh - 100px);
   background: #ffffff;
-  box-shadow: -8px 0 24px rgba(15, 23, 42, 0.15);
-  transform: translateX(100%);
-  transition: transform 0.25s ease-out;
-  z-index: 96;
-  padding: 16px 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.3s ease-out, opacity 0.2s ease-out;
+  z-index: 99;
+  padding: 2rem 1rem;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 1rem;
+  align-items: center;
+  overflow-y: auto;
 }
 
 .mobile-menu.open {
-  transform: translateX(0);
+  transform: translateY(0) !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  display: flex !important;
 }
 
-.mobile-link {
-  font-size: 15px;
+.mobile-menu a {
+  width: 100%;
+  max-width: 320px;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 14px 20px;
+  border-radius: 12px;
+  color: #173405;
+  background: #f9fef7;
   text-decoration: none;
-  color: #111827;
-  padding: 8px 0;
+  transition: all 0.2s ease;
 }
 
-.mobile-link.active {
-  color: #2f9e44;
-  font-weight: 500;
+.mobile-menu a:hover {
+  background: #eaffde;
+  color: #2b7600;
 }
 
-/* ============= RESPONSIVE ============= */
+/* WhatsApp button in menu */
+.mobile-whatsapp {
+  margin-top: 1rem;
+  background: #22c55e !important;
+  color: #ffffff !important;
+  font-size: 1.2rem !important;
+  padding: 16px 24px !important;
+  border-radius: 50px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
+}
 
-@media (max-width: 1200px) {
-  .header-inner {
-    padding: 0 32px;
-  }
+.mobile-whatsapp i {
+  font-size: 1.4rem;
+}
 
-  .search-box {
-    width: 320px;
-  }
+/* ============= RESPONSIVE VISIBILITY ============= */
 
-  .header-nav {
-    gap: 24px;
-  }
+@media (max-width: 992px) {
+  .header-nav { display: none; }
+  .menu-toggle { display: flex; }
+  .whatsapp-chip span { display: none; }
 }
 
 @media (max-width: 768px) {
-  .header-inner {
-    height: auto;
-    padding: 8px 16px;
-    flex-wrap: wrap;
-    row-gap: 8px;
-  }
-
-  .header-left {
-    width: 100%;
-    gap: 16px;
-  }
-
-  .search-box {
-    flex: 1;
-    width: auto;
-  }
-
-  /* hide desktop nav, we use sidebar here */
-  .header-nav {
-    display: none;
-  }
-
-  /* show hamburger */
-  .menu-toggle {
-    display: inline-flex;
-  }
-
-  /* tweak WhatsApp text */
-  .whatsapp-chip span {
-    font-size: 13px;
-  }
-
-  .mobile-menu {
-    top: 80px; /* header shrinks on mobile */
-    height: calc(100vh - 80px);
-  }
+  .header-inner { padding: 0 1rem; }
+  .search-box { max-width:none; }
 }

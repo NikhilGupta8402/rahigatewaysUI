@@ -2,171 +2,26 @@
   <!-- Hero Section -->
   <section class="hero">
     <div class="hero-overlay"></div>
-    <img
+
+    <!-- VIDEO BACKGROUND -->
+    <video
+      #heroVideo
       class="hero-bg"
-      src="assets/images/hero.png"
-      alt="Travelers in mountains"
-    />
+      muted
+      loop
+      playsinline
+      preload="auto"
+      [muted]="true"
+    >
+      <source src="assets/videos/hero-bg.mp4" type="video/mp4" />
+    </video>
+
     <div class="hero-content">
-      <p class="eyebrow">Your Story, Our Routes</p>
       <h1>Turn Your Destinations into Lifelong Stories</h1>
       <p class="sub">
-        Experience seamless travel, curated just for you, by India’s most
+        Experience seamless travel, curated just for you, by India's most
         trusted partner.
       </p>
-      <div class="hero-actions">
-        <button class="btn-primary">Explore All Packages</button>
-        <button class="btn-ghost">Talk to a Travel Expert</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- Special Offers -->
-  <!-- <section class="section">
-    <div class="section-header">
-      <div>
-        <h2>Special Offers From <span>Rahi Gateways</span></h2>
-        <p>Limited-time experiences crafted for unforgettable getaways.</p>
-      </div>
-      <button class="link-button">See all</button>
-    </div>
-
-    <div class="card-row scroll-x">
-      <article
-        class="pill-card"
-        *ngFor="let offer of specialOffers"
-      >
-        <div class="pill-img">
-          <img [src]="offer.imageUrl" [alt]="offer.title" />
-        </div>
-        <div class="pill-body">
-          <h3>{{ offer.title }}</h3>
-          <p>{{ offer.subtitle }}</p>
-          <div class="pill-footer">
-            <span class="price">{{ offer.priceLabel }}</span>
-            <button class="btn-chip">{{ offer.ctaLabel }}</button>
-          </div>
-        </div>
-      </article>
-    </div>
-  </section> -->
-  <section class="section">
-    <div class="section-header">
-      <div class="section-header-text">
-        <h2>Special Offers From <span>Rahi Gateways</span></h2>
-      </div>
-      <button class="link-button">See all</button>
-    </div>
-
-    <div class="card-row">
-      <article class="pill-card" *ngFor="let offer of specialOffers">
-        <div class="pill-img">
-          <img [src]="offer.imageUrl" [alt]="offer.title" />
-        </div>
-        <div class="pill-body">
-          <h3>{{ offer.title }}</h3>
-          <p>{{ offer.subtitle }}</p>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <!-- International Adventures -->
-  <!-- <section class="section">
-    <div class="section-header">
-      <div>
-        <h2>International Adventures Tailored For You</h2>
-        <p>From visas to local guides, every detail is handled end-to-end.</p>
-      </div>
-      <button class="btn-primary btn-sm">Explore All Packages</button>
-    </div>
-
-    <div class="grid-4">
-      <article
-        class="destination-card"
-        *ngFor="let pkg of internationalPackages"
-      >
-        <div class="dest-img">
-          <img [src]="pkg.imageUrl" [alt]="pkg.title" />
-        </div>
-        <div class="dest-body">
-          <h3>{{ pkg.title }}</h3>
-          <p>{{ pkg.subtitle }}</p>
-          <div class="dest-footer">
-            <span class="price">{{ pkg.priceLabel }}</span>
-            <button class="btn-chip">{{ pkg.ctaLabel }}</button>
-          </div>
-        </div>
-      </article>
-    </div>
-  </section> -->
-
-  <!-- International Adventures -->
-  <!-- <section class="section">
-    <div class="section-header">
-      <div>
-        <h2>International Adventures Tailored For You</h2>
-        <p>From visas to local guides, every detail is handled end-to-end.</p>
-      </div>
-      <button class="btn-primary btn-sm">Explore All Packages</button>
-    </div>
-
-    <div class="grid-4">
-      <article
-        class="destination-card"
-        *ngFor="let pkg of internationalPackages"
-      >
-        <div class="dest-img">
-          <img [src]="pkg.imageUrl" [alt]="pkg.title" />
-        </div>
-        <div class="dest-body">
-          <h3>{{ pkg.title }}</h3>
-          <p>{{ pkg.subtitle }}</p>
-          <div class="dest-footer">
-            <span class="price">{{ pkg.priceLabel }}</span>
-            <button class="btn-chip">{{ pkg.ctaLabel }}</button>
-          </div>
-        </div>
-      </article>
-    </div>
-  </section> -->
-  <section class="intl-section">
-    <div class="intl-hero">
-      <div class="intl-hero-inner">
-        <h2>International Adventures Tailored For You</h2>
-        <p>
-          Stop dreaming and start exploring. We handle every detail, from visas
-          to local guides.
-        </p>
-
-        <button class="intl-hero-btn">Explore All Packages</button>
-      </div>
-    </div>
-
-    <div class="intl-cards">
-      <!-- Slider arrows -->
-      <button class="slider-btn prev" (click)="scrollIntl(-1)">‹</button>
-      <button class="slider-btn next" (click)="scrollIntl(1)">›</button>
-
-      <!-- Horizontal slider -->
-      <div class="intl-slider" #intlSlider>
-        <article
-          class="destination-card"
-          *ngFor="let pkg of internationalPackages"
-        >
-          <div class="dest-img">
-            <img [src]="pkg.imageUrl" [alt]="pkg.title" />
-          </div>
-          <div class="dest-body">
-            <h3>{{ pkg.title }}</h3>
-            <p>{{ pkg.subtitle }}</p>
-            <div class="dest-footer">
-              <span class="price">{{ pkg.priceLabel }}</span>
-              <button class="btn-chip">{{ pkg.ctaLabel }}</button>
-            </div>
-          </div>
-        </article>
-      </div>
     </div>
   </section>
 
@@ -190,7 +45,50 @@
     </div>
   </section>
 
-  <!-- Discover India - same design as International Adventures -->
+  <!-- International Adventures -->
+  <section class="intl-section">
+    <div class="intl-hero">
+      <div class="intl-hero-inner">
+        <h2>International Adventures Tailored For You</h2>
+        <p>
+          Stop dreaming and start exploring. We handle every detail, from visas
+          to local guides.
+        </p>
+
+        <button class="intl-hero-btn">Explore All Packages</button>
+      </div>
+    </div>
+
+    <div class="intl-cards">
+      <!-- Slider arrows (hidden on mobile via CSS) -->
+      <button class="slider-btn prev" (click)="scrollIntl(-1)">‹</button>
+      <button class="slider-btn next" (click)="scrollIntl(1)">›</button>
+
+      <!-- Horizontal slider -->
+      <div class="intl-slider" #intlSlider>
+        <article
+          class="destination-card"
+          *ngFor="let pkg of internationalPackages"
+        >
+          <div class="dest-img">
+            <img [src]="pkg.imageUrl" [alt]="pkg.title" />
+          </div>
+          <div class="dest-body">
+            <h3>{{ pkg.title }}</h3>
+            <p>{{ pkg.subtitle }}</p>
+            <div class="dest-footer">
+              <span class="price"
+                >{{ pkg.priceLabel }}<small>/Person</small></span
+              >
+              <button class="btn-chip">{{ pkg.ctaLabel }}</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Discover India -->
   <section class="india-section">
     <div class="india-hero">
       <div class="india-hero-inner">
@@ -200,12 +98,12 @@
           Rajasthan and the South.
         </p>
 
-        <button class="india-hero-btn">Explore All India Packages</button>
+        <button class="india-hero-btn">Explore All Packages</button>
       </div>
     </div>
 
     <div class="india-cards">
-      <!-- Slider arrows -->
+      <!-- Slider arrows (hidden on mobile via CSS) -->
       <button class="slider-btn prev" (click)="scrollIndia(-1)">‹</button>
       <button class="slider-btn next" (click)="scrollIndia(1)">›</button>
 
@@ -219,12 +117,36 @@
             <h3>{{ pkg.title }}</h3>
             <p>{{ pkg.subtitle }}</p>
             <div class="dest-footer">
-              <span class="price">{{ pkg.priceLabel }}</span>
+              <span class="price"
+                >{{ pkg.priceLabel }} <small>/Person</small></span
+              >
               <button class="btn-chip">{{ pkg.ctaLabel }}</button>
             </div>
           </div>
         </article>
       </div>
+    </div>
+  </section>
+
+  <!-- Special Offers -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-header-text">
+        <h2><span>Special Offers</span> From Rahi Gateways</h2>
+      </div>
+      <button class="link-button">See all</button>
+    </div>
+
+    <div class="card-row">
+      <article class="pill-card" *ngFor="let offer of specialOffers">
+        <div class="pill-img">
+          <img [src]="offer.imageUrl" [alt]="offer.title" />
+        </div>
+        <div class="pill-body">
+          <h3>{{ offer.title }}</h3>
+          <p>{{ offer.subtitle }}</p>
+        </div>
+      </article>
     </div>
   </section>
 
@@ -253,90 +175,84 @@
   </section>
 
   <!-- Our Journey band -->
-<section class="section story-section">
-  <div class="story-grid">
-
-    <!-- LEFT SIDE -->
-    <div class="story-image-container">
-      <div class="story-main-image">
-        <img src="assets/images/our-journey.png" alt="Travellers with map" />
+  <section class="section story-section">
+    <div class="story-grid">
+      <!-- LEFT SIDE -->
+      <div class="story-image-container">
+        <div class="story-main-image">
+          <img src="assets/images/our-journey.png" alt="Travellers with map" />
+        </div>
       </div>
-    </div>
 
-    <!-- RIGHT SIDE -->
-    <div class="story-text">
-      <h2>
-        Our Journey: <span>Driven by Passion, Powered by Innovation</span>
-      </h2>
+      <!-- RIGHT SIDE -->
+      <div class="story-text">
+        <h2>
+          Our Journey: <span>Driven by Passion, Powered by Innovation</span>
+        </h2>
 
-      <p>
-        Remember the days when our ambitions were limited to what we saw around us — 
-        becoming an engineer, doctor, banker or teacher? Back then, nobody imagined that 
-        travelling the world, curating experiences, and helping others discover new horizons 
-        could become a full-fledged career. But as we grew, we learned that a career is 
-        anything that allows you to create value, solve problems and leave an impact on 
-        people's lives. That's exactly how Rahi Gateways began.
-      </p>
-
-      <div class="vision-box">
-        <h3>Our Vision</h3>
         <p>
-          To become India's most trusted and innovative travel partner by delivering seamless,
-          transparent, and memorable experiences across the globe.
+          Remember the days when our ambitions were limited to what we saw
+          around us — becoming an engineer, doctor, banker or teacher? Back
+          then, nobody imagined that travelling the world, curating experiences,
+          and helping others discover new horizons could become a full-fledged
+          career. But as we grew, we learned that a career is anything that
+          allows you to create value, solve problems and leave an impact on
+          people's lives. That's exactly how Rahi Gateways began.
         </p>
+
+        <div class="vision-box">
+          <h3>Our Vision</h3>
+          <p>
+            To become India's most trusted and innovative travel partner by
+            delivering seamless, transparent, and memorable experiences across
+            the globe.
+          </p>
+        </div>
       </div>
-
     </div>
-
-  </div>
-</section>
-
+  </section>
 
   <!-- Why Rahi Gateways -->
-<!-- Why Rahi Gateways -->
-<section class="section why-section">
-  <div class="section-header center">
-    <h2>Why <span>Rahi Gateways</span> Stands Apart</h2>
-  </div>
+  <section class="section why-section">
+    <div class="section-header center">
+      <h2>Why <span>Rahi Gateways</span> Stands Apart</h2>
+    </div>
 
-  <div class="grid-4">
-    <article class="feature-card" *ngFor="let feature of featureCards">
-      <div class="feature-icon">
-        <img [src]="feature.icon" alt="{{ feature.title }} icon" />
-      </div>
-      <h3>{{ feature.title }}</h3>
-      <p>{{ feature.description }}</p>
-    </article>
-  </div>
-</section>
-
+    <div class="grid-4">
+      <article class="feature-card" *ngFor="let feature of featureCards">
+        <div class="feature-icon">
+          <img [src]="feature.icon" alt="{{ feature.title }} icon" />
+        </div>
+        <h3>{{ feature.title }}</h3>
+        <p>{{ feature.description }}</p>
+      </article>
+    </div>
+  </section>
 
   <!-- FAQ -->
-<section class="section faq-section">
-  <div class="section-header center">
-    <h2>Frequently <span>Asked Questions</span> </h2>
-  </div>
+  <section class="section faq-section">
+    <div class="section-header center">
+      <h2>Frequently <span>Asked Questions</span></h2>
+    </div>
+    <div class="faq-grid">
+      <div
+        class="faq-card"
+        *ngFor="let faq of faqs; let i = index"
+        [class.open]="openedFaqIndex === i"
+        (click)="toggleFaq(i)"
+      >
+        <button class="faq-header" type="button">
+          <span>{{ faq.question }}</span>
+          <i
+            class="ri-arrow-down-s-line faq-icon"
+            [class.rotate]="openedFaqIndex === i"
+          ></i>
+        </button>
 
-  <div class="faq-grid">
-    <div
-      class="faq-card"
-      *ngFor="let faq of faqs; let i = index"
-      [class.open]="openedFaqIndex === i"
-      (click)="toggleFaq(i)"
-    >
-      <button class="faq-header" type="button">
-        <span>{{ faq.question }}</span>
-        <i
-          class="ri-arrow-down-s-line"
-          [class.rotate]="openedFaqIndex === i"
-        ></i>
-      </button>
-
-      <div class="faq-body" *ngIf="openedFaqIndex === i">
-        <p>{{ faq.answer }}</p>
+        <div class="faq-body">
+          <p>{{ faq.answer }}</p>
+        </div>
       </div>
     </div>
-  </div>
-</section>
-
+  </section>
 </div>

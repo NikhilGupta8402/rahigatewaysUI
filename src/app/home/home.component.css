@@ -1,32 +1,59 @@
+@import url("https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css");
+
 /* =========================
-   GLOBAL / PAGE WRAPPER
+   GLOBAL RESET + WRAPPER
    ========================= */
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
 .page-wrapper {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+  font-family:
+    -apple-system, /* SF Pro on iOS/macOS */
+    BlinkMacSystemFont, /* Older Safari */
+    "Segoe UI", /* Windows */
+    system-ui,
+    Roboto,
+    Inter,
+    "Helvetica Neue",
+    Arial,
     sans-serif;
   color: #1f2933;
   background: #ffffff;
+  overflow-x: hidden; /* ⬅ stop horizontal scroll on mobile */
 }
 
 /* =========================
    HERO (TOP BANNER)
    ========================= */
+
 .hero {
   position: relative;
   width: 100%;
   max-width: 100%;
   margin: 0;
-  height: 670px;
+  height: 630px;
   border-radius: 0;
   overflow: hidden;
 }
 
-/* Background image */
+/* Background VIDEO (replacing IMG) */
 .hero-bg {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
 }
 
 /* Dark overlay so text is readable */
@@ -34,6 +61,8 @@
   position: absolute;
   inset: 0;
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.25));
+  z-index: 1; /* Above video, below text */
+  pointer-events: none;
 }
 
 /* === CENTERED CONTENT === */
@@ -43,13 +72,14 @@
   padding: 0 1.5rem;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* vertical center */
-  align-items: center; /* horizontal center */
+  justify-content: center;
+  align-items: center;
   text-align: center;
   color: #ffffff;
+  z-index: 2; /* Above everything */
 }
 
-/* small label above heading */
+/* small label above heading (optional if used later) */
 .hero-content .eyebrow {
   text-transform: uppercase;
   font-size: 0.85rem;
@@ -60,69 +90,22 @@
 
 /* main heading */
 .hero-content h1 {
-  font-size: 3.2rem;
+  font-size: 4.2rem;
+  font-weight: 645;
   line-height: 1.08;
-  max-width: 780px;
+  max-width: 800px;
   margin: 0 auto 1.25rem;
 }
 
 /* subtitle line */
 .hero-content .sub {
-  font-size: 1rem;
-  max-width: 520px;
+  font-size: 1.2rem;
+  max-width: 700px;
   opacity: 0.95;
   margin: 0 auto 2rem;
 }
 
-/* buttons container */
-.hero-actions {
-  display: flex;
-  gap: 0.9rem;
-  flex-wrap: wrap;
-  justify-content: center; /* center buttons under text */
-}
-
-/* buttons stay same, just slightly bigger to match hero */
-.btn-primary,
-.btn-ghost,
-.btn-chip,
-.btn-light {
-  border-radius: 999px;
-  border: none;
-  cursor: pointer;
-  font-size: 0.9rem;
-  font-weight: 600;
-}
-.btn-primary {
-  padding: 0.6rem 1.4rem;
-  background: #2f9e44;
-  color: #ffffff;
-}
-.btn-primary:hover {
-  background: #1c7c36;
-}
-.btn-ghost {
-  padding: 0.6rem 1.4rem;
-  background: rgba(255, 255, 255, 0.1);
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-}
-.btn-chip {
-  padding: 0.35rem 0.9rem;
-  background: #e9f9ee;
-  color: #1c7c36;
-}
-.btn-sm {
-  padding: 0.4rem 1.1rem;
-  font-size: 0.8rem;
-}
-.btn-light {
-  padding: 0.5rem 1.2rem;
-  background: #ffffff;
-  color: #1c7c36;
-}
-
-/* responsive: shrink text a bit on smaller screens */
+/* Responsive Fix */
 @media (max-width: 768px) {
   .hero {
     height: 520px;
@@ -146,7 +129,7 @@
 .section {
   width: 100%;
   max-width: 100%;
-  margin: 2.5rem 0;
+  margin: 0rem 0;
   padding: 0 2.5rem;
 }
 
@@ -161,9 +144,9 @@
 .section-header {
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
   gap: 1rem;
-  margin-bottom: 1.4rem;
+  margin-bottom: 0rem;
 }
 
 .section-header.center {
@@ -176,7 +159,7 @@
 }
 
 .section-header h2 span {
-  color: #2f9e44;
+  color: #2b7600;
 }
 
 .section-header p {
@@ -191,9 +174,9 @@
 .link-button {
   border: none;
   background: transparent;
-  color: #1c7c36;
-  font-weight: 600;
-  font-size: 0.9rem;
+  color: #173404;
+  font-weight: 400;
+  font-size: 1.1rem;
   cursor: pointer;
 }
 
@@ -203,11 +186,11 @@
   display: flex;
   gap: 1rem;
   overflow-x: auto;
-  padding-bottom: 0.5rem;
+  padding-bottom: 0rem;
 }
 
 .scroll-x::-webkit-scrollbar {
-  height: 6px;
+  height: 0px;
 }
 
 .scroll-x::-webkit-scrollbar-thumb {
@@ -220,7 +203,8 @@
    ========================= */
 
 .section-header-text h2 {
-  font-size: 2.2rem;
+  color: #173404;
+  font-size: 2.4rem;
 }
 
 /* container row */
@@ -228,13 +212,13 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 64px;
-  padding: 20px 0;
+  gap: 10px;
+  padding: 0px 0;
   overflow-x: auto;
 }
 
 .card-row::-webkit-scrollbar {
-  height: 6px;
+  height: 0px;
 }
 .card-row::-webkit-scrollbar-thumb {
   background: #d0d7e2;
@@ -254,9 +238,9 @@
 
 /* circular image */
 .pill-img {
-  flex: 0 0 120px;
-  width: 120px;
-  height: 120px;
+  flex: 0 0 100px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   overflow: hidden;
 }
@@ -274,7 +258,7 @@
   margin: 0 0 4px;
   font-size: 16px;
   font-weight: 700;
-  color: #173404;
+  color: #2b7600;
 }
 
 .pill-body p {
@@ -311,17 +295,17 @@
   position: relative;
   width: 100%;
   max-width: 100%;
-  min-height: 320px;
+  min-height: 120px;
   background: linear-gradient(135deg, #1a4d2e 0%, #2d5f3a 50%, #4a7c59 100%);
   color: #ffffff;
   overflow: hidden;
-  padding-bottom: 120px;
-  /* 🔽 your background image */
+  padding-bottom: 70px;
   background-image: url("/assets/images/intl-hero-bg.jpg");
   background-repeat: no-repeat;
-  background-position: center center; /* adjust to 'center bottom' if needed */
-  background-size: cover; 
+  background-position: center center;
+  background-size: cover;
 }
+
 .intl-hero::before {
   content: "";
   position: absolute;
@@ -340,16 +324,16 @@
   max-width: 1400px;
   width: 100%;
   margin: 0 auto;
-  padding: 50px 2.5rem 40px;
+  padding: 35px 2.5rem 40px;
   box-sizing: border-box;
   position: relative;
-  z-index: 1; /* 🔽 keeps text above the ::before overlay */
+  z-index: 1;
 }
 
 .intl-hero-inner h2 {
-  font-size: 38px;
+  font-size: 37px;
   line-height: 1.2;
-  font-weight: 700;
+  font-weight: 650;
   margin: 0 0 10px;
   letter-spacing: -0.5px;
 }
@@ -358,7 +342,7 @@
   font-size: 16px;
   line-height: 1.5;
   margin: 0 0 24px;
-  max-width: 600px;
+  max-width: 700px;
   opacity: 0.95;
 }
 
@@ -384,8 +368,8 @@
 .intl-cards {
   max-width: 100%;
   width: 100%;
-  margin: -150px auto 0;
-  padding: 0 2.5rem 50px;
+  margin: -75px auto 0;
+  padding: 0 0rem 20px;
   position: relative;
   z-index: 10;
   box-sizing: border-box;
@@ -393,19 +377,26 @@
 
 /* Destination cards (used in intl + India) */
 .destination-card {
-  background: #ffffff;
+  background: #f9fef7;
   border-radius: 24px;
-  padding: 16px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s ease;
-  height: 100%;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  height: 400px;
+  width: 300px;
 }
 
+/* 🔥 NEW HOVER EFFECT:
+   - No movement
+   - White background
+   - Same soft shadow
+*/
 .destination-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.12);
+  background: #ffffff;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+  transform: none;
 }
 
 /* Image container */
@@ -413,15 +404,22 @@
   border-radius: 18px;
   overflow: hidden;
   margin-bottom: 16px;
-  height: 220px;
+  height: 200px;
   position: relative;
 }
 
+/* base image state */
 .dest-img img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+  transition: transform 0.4s ease;
+}
+
+/* ✨ NEW: image zoom on card hover */
+.destination-card:hover .dest-img img {
+  transform: scale(1.15);
 }
 
 /* Text area */
@@ -434,11 +432,11 @@
 }
 
 .dest-body h3 {
-  font-size: 26px;
-  font-weight: 700;
+  font-size: 25px;
+  font-weight: 650;
   line-height: 1.2;
-  color: #1a1a1a;
-  margin: 0 0 2px;
+  color: #173405;
+  margin: 1.5rem 0 0;
 }
 
 .dest-body p {
@@ -470,30 +468,31 @@
 }
 
 .dest-footer .price small {
-  font-size: 14px;
+  font-size: 17px;
   font-weight: 400;
   color: #757575;
 }
 
 /* Book Now button */
 .destination-card .btn-chip {
-  padding: 10px 24px;
+  padding: 12px 20px;
   border-radius: 999px;
   border: none;
-  background: #2d5f3a;
+  background: #235e00;
   color: #ffffff;
-  font-size: 15px;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 400;
   cursor: pointer;
   white-space: nowrap;
-  transition: all 0.2s;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
   box-shadow: 0 2px 8px rgba(45, 95, 58, 0.3);
 }
 
+/* No movement on hover, only color/shadow change */
 .destination-card .btn-chip:hover {
   background: #1a4d2e;
-  transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(45, 95, 58, 0.4);
+  transform: none;
 }
 
 /* === INTERNATIONAL SLIDER BEHAVIOUR === */
@@ -559,12 +558,138 @@
 .slider-btn:hover {
   transform: translateY(-50%) scale(1.05);
 }
+
+/* =========================
+   INTERNATIONAL ADVENTURES (duplicate, kept for consistency)
+   ========================= */
+
+.intl-section {
+  margin: 20px 0 10px;
+  position: relative;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+/* green hero banner */
+.intl-hero {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  min-height: 120px;
+  background: linear-gradient(135deg, #1a4d2e 0%, #2d5f3a 50%, #4a7c59 100%);
+  color: #ffffff;
+  overflow: hidden;
+  padding-bottom: 70px;
+  background-image: url("/assets/images/intl-hero-bg.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.intl-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(26, 77, 46, 0.9) 30%,
+    rgba(45, 95, 58, 0.85) 75%,
+    rgba(64, 119, 80, 0.7) 100%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.intl-hero-inner {
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 35px 2.5rem 40px;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+}
+
+.intl-hero-inner h2 {
+  font-size: 37px;
+  line-height: 1.2;
+  font-weight: 650;
+  margin: 0 0 10px;
+  letter-spacing: -0.5px;
+}
+
+.intl-hero-inner p {
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0 0 24px;
+  max-width: 700px;
+  opacity: 0.95;
+}
+
+.intl-hero-btn {
+  padding: 16px 20px;
+  border-radius: 10px;
+  border: none;
+  background: #ffffff;
+  color: #1a4d2e;
+  font-size: 15px;
+  font-weight: 550;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.intl-hero-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* cards container - OVERLAPPING the banner */
+.intl-cards {
+  max-width: 100%;
+  width: 100%;
+  margin: -75px auto 0;
+  padding: 0 0rem 0px;
+  position: relative;
+  z-index: 10;
+  box-sizing: border-box;
+}
+
+/* Horizontal slider container */
+.intl-slider {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 18px;
+  max-width: 1400px;
+  margin: 0 auto;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+}
+
+/* Hide scrollbar */
+.intl-slider::-webkit-scrollbar {
+  display: none;
+}
+.intl-slider {
+  scrollbar-width: none;
+}
+
+/* Cards inside intl slider */
+.intl-slider .destination-card {
+  scroll-snap-align: start;
+  flex: 0 0 auto;
+  min-width: 320px;
+  max-width: 360px;
+}
+
 /* =========================
    DISCOVER INDIA – SAME DESIGN
    ========================= */
 
 .india-section {
-  margin: 60px 0 40px;
+  margin: 20px 0 40px;
   position: relative;
   max-width: 100%;
   overflow: hidden;
@@ -575,17 +700,17 @@
   position: relative;
   width: 100%;
   max-width: 100%;
-  min-height: 320px;
+  min-height: 120px;
   background: linear-gradient(135deg, #0f2b1b 0%, #18412a 50%, #256a3a 100%);
   color: #ffffff;
   overflow: hidden;
-  padding-bottom: 120px;
-  /* 🔽 your background image */
+  padding-bottom: 70px;
   background-image: url("/assets/images/india-hero-bg.jpg");
   background-repeat: no-repeat;
-  background-position: center center; /* adjust to 'center bottom' if needed */
-  background-size: cover; 
+  background-position: center center;
+  background-size: cover;
 }
+
 .india-hero::before {
   content: "";
   position: absolute;
@@ -604,17 +729,16 @@
   max-width: 1400px;
   width: 100%;
   margin: 0 auto;
-  padding: 50px 2.5rem 40px;
+  padding: 35px 2.5rem 40px;
   box-sizing: border-box;
   position: relative;
-  z-index: 1; /* 🔽 keeps text above the ::before overlay */
+  z-index: 1;
 }
-
 
 .india-hero-inner h2 {
   font-size: 38px;
   line-height: 1.2;
-  font-weight: 700;
+  font-weight: 650;
   margin: 0 0 10px;
   letter-spacing: -0.5px;
 }
@@ -623,13 +747,13 @@
   font-size: 16px;
   line-height: 1.5;
   margin: 0 0 24px;
-  max-width: 600px;
+  max-width: 700px;
   opacity: 0.95;
 }
 
 .india-hero-btn {
-  padding: 14px 28px;
-  border-radius: 999px;
+  padding: 16px 20px;
+  border-radius: 10px;
   border: none;
   background: #ffffff;
   color: #0f2b1b;
@@ -649,14 +773,14 @@
 .india-cards {
   max-width: 100%;
   width: 100%;
-  margin: -150px auto 0;
-  padding: 0 2.5rem 50px;
+  margin: -75px auto 0;
+  padding: 0 2.5rem 0px;
   position: relative;
   z-index: 10;
   box-sizing: border-box;
 }
 
-/* Horizontal slider container - same as intl */
+/* Horizontal slider container */
 .india-slider {
   display: flex;
   flex-wrap: nowrap;
@@ -677,7 +801,7 @@
   scrollbar-width: none;
 }
 
-/* Slide cards */
+/* Cards inside india slider */
 .india-slider .destination-card {
   scroll-snap-align: start;
   flex: 0 0 auto;
@@ -685,9 +809,53 @@
   max-width: 360px;
 }
 
-/* Responsive tweaks */
+/* =========================
+   SHARED CARD DESIGN (ALREADY DEFINED ABOVE)
+   ========================= */
+
+/* =========================
+   SLIDER BUTTONS (shared)
+   ========================= */
+
+.slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: none;
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 600;
+  color: #1a4d2e;
+  z-index: 20;
+}
+
+.slider-btn.prev {
+  left: 1.2rem;
+}
+
+.slider-btn.next {
+  right: 1.2rem;
+}
+
+.slider-btn:hover {
+  transform: translateY(-50%) scale(1.05);
+}
+
+/* =========================
+   RESPONSIVE TWEAKS
+   ========================= */
+
 @media (max-width: 1024px) {
-  .india-slider .destination-card {
+  .india-slider .destination-card,
+  .intl-slider .destination-card {
     min-width: 280px;
     max-width: 320px;
   }
@@ -702,7 +870,16 @@
     padding: 16px 16px 32px;
   }
 
-  .india-slider .destination-card {
+  .intl-hero-inner {
+    padding: 30px 16px 32px;
+  }
+
+  .intl-cards {
+    margin-top: -60px;
+  }
+
+  .india-slider .destination-card,
+  .intl-slider .destination-card {
     min-width: 260px;
     max-width: 280px;
   }
@@ -714,7 +891,7 @@
 
 .newyear-section .section-header {
   align-items: center;
-  margin-bottom: 2.2rem;
+  margin-bottom: 0rem;
 }
 
 .newyear-section .section-header h2 {
@@ -736,15 +913,16 @@
   align-items: center;
   justify-content: flex-start;
   gap: 40px;
-  padding: 20px 0 28px;
+  padding: 00px 00px;
 }
 
 .newyear-section .bubble-item {
-  min-width: 180px;
+  min-width: 144px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
 /* Hide scrollbar only in New Year section */
 .newyear-section .scroll-x {
   overflow-x: auto;
@@ -758,8 +936,8 @@
 
 /* big colorful circles */
 .newyear-section .bubble-img {
-  width: 160px;
-  height: 160px;
+  width: 130px;
+  height: 130px;
   border-radius: 999px;
   overflow: hidden;
   border: none;
@@ -791,31 +969,6 @@
   text-align: center;
 }
 
-/* =========================
-   DOTS INDICATOR
-   ========================= */
-
-.ny-dots {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 8px;
-}
-
-.ny-dots .dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 999px;
-  background: #d4d4d8;
-}
-
-.ny-dots .dot.active {
-  width: 26px;
-  border-radius: 999px;
-  background: #15803d;
-}
-
 /* responsive tweaks */
 @media (max-width: 768px) {
   .newyear-section .section-header h2 {
@@ -843,17 +996,17 @@
 .journeys-section .section-header {
   justify-content: center;
   text-align: center;
-  margin-bottom: 2.4rem;
+  margin-bottom: 0rem;
 }
 
 .journeys-section .section-header h2 {
   font-size: 2.4rem;
   font-weight: 650;
-  /* deep green */
+  color: #0f2b1b;
 }
 
 .journeys-section .section-header h2 span {
-  color: #15803d; /* brighter accent green */
+  color: #15803d;
 }
 
 /* =========================
@@ -861,81 +1014,100 @@
    ========================= */
 
 .journeys-section .grid-4 {
-  gap: 2rem; /* more breathing room between cards */
+  gap: 2rem;
 }
 
 .journey-card {
-  border-radius: 1.5rem;
-  overflow: hidden;
-  border: 1px solid #e5e7eb;
   background: #ffffff;
+  border-radius: 0px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+  transition: background 0.4s ease, color 0.4s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  transform: none !important; /* no lift */
 }
 
+/* On hover → reverse color WHITE ➜ GREEN */
 .journey-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.12);
+  background: #f9fef7 !important;
+  color: #ffffff;
+  box-shadow: 0 8px 30px rgba(21, 128, 61, 0.2);
+  transform: none !important; /* no movement */
 }
 
-/* big image on top */
+/* IMAGE ZOOM only */
 .journey-img img {
   width: 100%;
-  height: 220px;
+  height: 200px;
   object-fit: cover;
   display: block;
+  border-radius: 0px;
+  transition: transform 0.4s ease;
 }
 
-/* text area */
+.journey-card:hover .journey-img img {
+  transform: scale(1.1);
+  transition: transform 0.5s ease-in-out;
+}
+
+/* Text area */
 .journey-body {
-  padding: 1.2rem 1.4rem 1.4rem;
+  padding: 0.1rem 0.4rem 1.4rem;
+  transition: color 0.3s ease;
 }
 
 .journey-body h3 {
-  font-size: 1.1rem;
-  margin-bottom: 0.4rem;
-  color: #145c1f;
-  font-weight: 700;
+  font-size: 1.4rem;
+  font-weight: 650;
+  margin-bottom: 0rem;
+  color: #173404;
+  transition: color 0.3s ease;
 }
 
 .journey-body p {
-  font-size: 0.9rem;
+  font-size: 1.1rem;
+  font-style: italic;
   color: #6b7280;
   margin-bottom: 0.9rem;
+  transition: color 0.3s ease;
 }
 
-/* "View Details" link with arrow */
+/* On hover → make text GREEN */
+.journey-card:hover .journey-body h3 {
+  color: #2b7600 !important;
+}
+
+/* "View Details" link */
 .journey-link {
   padding: 0;
   background: transparent;
   border: none;
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   font-weight: 600;
   color: #15803d;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  transition: color 0.3s ease;
 }
 
 .journey-link::after {
   content: "→";
-  font-size: 0.9rem;
+  font-size: 2rem;
   transition: transform 0.15s ease;
+}
+
+/* On card hover → arrow move */
+.journey-card:hover .journey-link {
+  color: #2b7600 !important;
 }
 
 .journey-card:hover .journey-link::after {
   transform: translateX(3px);
 }
 
-/* center CTA button, give it a bit more presence */
-.journeys-cta {
-  padding: 0.8rem 2.4rem;
-  font-size: 1rem;
-  border-radius: 999px;
-}
-/* ===== CURATED JOURNEYS SECTION BUTTON FIX ===== */
+/* CTA Button Fix */
 .journeys-section .section-footer-center {
   display: flex;
   justify-content: center;
@@ -944,9 +1116,22 @@
 }
 
 .journeys-section .journeys-cta {
-  margin: 0 auto;
-  display: block;
-  text-align: center;
+  padding: 1.1rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 200;
+  border-radius: 10px;
+  background: #2b7600;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  transform: none !important;
+  box-shadow: 0 2px 10px rgba(21, 128, 61, 0.3);
+}
+
+.journeys-section .journeys-cta:hover {
+  background: #235e00;
+  transform: none !important;
 }
 
 /* =========================
@@ -970,19 +1155,15 @@
 }
 
 /* =============================
-   OUR JOURNEY SECTION (FULL WIDTH + OVERLAP LOOK)
-   ============================= */
-
-/* =============================
-   OUR JOURNEY SECTION (FULL WIDTH + OVERLAP LOOK)
+   OUR JOURNEY SECTION
    ============================= */
 
 .story-section {
   width: 100%;
   max-width: 100%;
-  margin: 50px 0;
+  margin: 20px 0;
   padding: 20px 5%;
-  background: linear-gradient(120deg, #e8fdf0 0%, #f0faf5 100%);
+  background: #f9fef7;
   border-radius: 0;
   box-sizing: border-box;
 }
@@ -1014,7 +1195,7 @@
 .story-text h2 {
   font-size: 40px;
   font-weight: 650;
-  color: #15803d;
+  color: #2b7600;
   line-height: 1.2;
   margin-bottom: 24px;
 }
@@ -1037,16 +1218,15 @@
   max-width: 100%;
   background: #ffffff;
   border-radius: 24px;
-  padding: 5px 34px;
-  margin-top: 20px;
+  padding: 0.01px 34px;
   box-shadow: 0 8px 30px rgba(0, 50, 20, 0.12);
-  border-left: 6px solid #15803d;
+  border-left: 6px solid #2b7600;
 }
 
 .story-text .vision-box h3 {
   font-size: 24px;
   font-weight: 750;
-  color: #15803d;
+  color: #2b7600;
   margin-bottom: 12px;
 }
 
@@ -1058,7 +1238,7 @@
 }
 
 /* =============================
-   RESPONSIVE FIX
+   OUR JOURNEY RESPONSIVE
    ============================= */
 
 @media (max-width: 1200px) {
@@ -1113,9 +1293,6 @@
     border-top: 6px solid #15803d;
   }
 }
-/* =========================
-   FEATURE CARDS
-   ========================= */
 
 /* =========================
    WHY RAHI GATEWAYS SECTION
@@ -1123,13 +1300,13 @@
 
 /* Section spacing */
 .why-section {
-  padding: 0rem 0 0rem;
+  padding: 0rem 4rem 0rem;
 }
 
 /* Centered heading */
 .why-section .section-header.center {
   text-align: center;
-  margin-bottom: 2.2rem;
+  margin-bottom: 0rem;
 }
 
 .why-section .section-header.center h2 {
@@ -1143,28 +1320,28 @@
 .why-section .grid-4 {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 38px; /* spacing between cards */
+  gap: 38px;
   width: 100%;
   max-width: 1500px;
   margin: 0 auto;
-  justify-items: center;
-  align-items: start;
+  justify-items: stretch;
+  align-items: stretch;
 }
 
-/* =========================
-   FEATURE CARDS (BIG)
-   ========================= */
+/* FEATURE CARDS */
 
 .why-section .feature-card {
   background: #ffffff;
   border: 1px solid #e5e7eb;
-  border-radius: 32px;
-  padding: 2.8rem 2rem 3rem; /* bigger inner spacing */
+  padding: 2rem 2rem 3rem;
   width: 100%;
-  max-width: 350px; /* bigger card width */
+  max-width: 100%;
   text-align: center;
-  transition: all 0.28s ease;
-  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  transition: background 0.4s ease, color 0.4s ease, border-color 0.3s ease;
+  box-shadow: none;
+  transform: none;
+  box-sizing: border-box;
+  height: 100%;
 }
 
 /* Icon circle */
@@ -1172,19 +1349,11 @@
   width: 92px;
   height: 92px;
   border-radius: 999px;
-  background: #dcfce7;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto 1.3rem;
-  transition: 0.3s ease;
-}
-
-.why-section .feature-icon span {
-  font-size: 1.9rem;
-  font-weight: 700;
-  color: #15803d;
-  text-transform: uppercase;
+  transition: background 0.3s ease;
 }
 
 /* Title */
@@ -1193,6 +1362,7 @@
   font-weight: 700;
   color: #022c22;
   margin-bottom: 0.5rem;
+  transition: color 0.3s ease;
 }
 
 /* Description */
@@ -1201,50 +1371,27 @@
   line-height: 1.7;
   color: #6b7280;
   margin: 0;
+  transition: color 0.3s ease;
 }
 
-/* =========================
-   GLOW EFFECTS
-   ========================= */
+/* HOVER EFFECT */
 
-/* First card: idle glow always on */
-.why-section .feature-card:first-child {
-  border-color: rgba(22, 163, 74, 0.6);
-  box-shadow: 0 0 26px rgba(22, 163, 74, 0.55);
-  animation: glowIdle 1.7s infinite alternate ease-in-out;
-}
-
-@keyframes glowIdle {
-  0% {
-    box-shadow: 0 0 10px rgba(22, 163, 74, 0.3);
-  }
-  100% {
-    box-shadow: 0 0 26px rgba(22, 163, 74, 0.6);
-  }
-}
-
-/* Hover: all cards lift + glow */
 .why-section .feature-card:hover {
-  transform: translateY(-6px) scale(1.04);
-  border-color: rgba(22, 163, 74, 0.7);
-  box-shadow: 0 0 26px rgba(22, 163, 74, 0.62);
+  background: #f9fef7;
+  border-color: #ffffff;
+  box-shadow: 0 8px 30px rgba(21, 128, 61, 0.2);
+  transform: none;
 }
 
-/* Icon pop on hover */
 .why-section .feature-card:hover .feature-icon {
-  transform: scale(1.12);
-  box-shadow: 0 0 14px rgba(22, 163, 74, 0.5);
+  background: #eaffde;
 }
 
-/* Optional – smoother text change */
-.why-section .feature-card:hover h3,
-.why-section .feature-card:hover p {
-  transition: 0.24s ease;
+.why-section .feature-card:hover h3 {
+  color: #2a7601;
 }
 
-/* =========================
-   RESPONSIVE
-   ========================= */
+/* WHY SECTION RESPONSIVE */
 
 @media (max-width: 1150px) {
   .why-section .grid-4 {
@@ -1267,51 +1414,50 @@
 }
 
 /* =========================
-   FAQ – full-width card
-   ========================= */
-/* =========================
-   FAQ – TWO-COLUMN FLEX
+   FAQ SECTION
    ========================= */
 
 .faq-section {
-  padding: 0rem 0 5rem;
+  padding: 0 0 5rem;
 }
 
-/* same heading as before */
 .faq-section .section-header.center h2 {
   font-size: 2.6rem;
   font-weight: 700;
   color: #022c22;
 }
 
-/* FLEX instead of GRID */
+/* FAQ GRID */
 .faq-grid {
   width: 90%;
   max-width: 1200px;
   margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap; /* allow multiple rows */
-  gap: 1.8rem 2.4rem; /* row / column gap */
-  align-items: flex-start; /* VERY IMPORTANT: do NOT stretch cards */
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 2.4rem;
+  row-gap: 1.8rem;
+  align-items: start;
 }
 
-/* each card takes about 50% width on desktop */
+/* FAQ card */
 .faq-card {
-  flex: 1 1 calc(50% - 1.2rem);
   background: #ffffff;
   border-radius: 18px;
-  padding: 1.4rem 1.7rem;
-  box-shadow: 0 18px 45px rgba(15, 118, 110, 0.08);
+  padding: 1rem 1.4rem;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 18px 45px rgba(15, 118, 110, 0.06);
   cursor: pointer;
-  transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
-  border: 1px solid transparent;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease,
+    background 0.2s ease;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
-/* open / active card */
+/* OPEN / active card */
 .faq-card.open {
-  border-color: rgba(22, 163, 74, 0.35);
-  box-shadow: 0 22px 55px rgba(22, 163, 74, 0.14);
-  transform: translateY(-2px);
+  border-color: #16a34a;
+  box-shadow: 0 22px 55px rgba(22, 163, 74, 0.12);
+  background: #f9fffb;
 }
 
 /* header row */
@@ -1332,26 +1478,39 @@
 }
 
 .faq-header span {
-  font-size: 1.05rem;
+  font-size: 1.2rem;
   font-weight: 600;
-  color: #064e3b;
+  color: #065f46;
 }
 
-/* arrow icon */
-.faq-header i {
+/* Chevron icon */
+.faq-icon {
   font-size: 1.4rem;
-  color: #16a34a;
-  transition: transform 0.2s ease;
+  color: #000000;
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
 }
 
-.faq-header i.rotate {
+/* Rotate arrow when open */
+.faq-icon.rotate {
   transform: rotate(180deg);
 }
 
-/* answer */
+/* Answer text - WITH ANIMATION */
 .faq-body {
-  margin-top: 0.6rem;
+  margin-top: 0.7rem;
   padding-right: 1.2rem;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.4s ease, opacity 0.3s ease, margin-top 0.3s ease;
+}
+
+/* When open - expand smoothly */
+.faq-card.open .faq-body {
+  max-height: 500px;
+  opacity: 1;
+  margin-top: 0.7rem;
 }
 
 .faq-body p {
@@ -1361,10 +1520,19 @@
   color: #4b5563;
 }
 
-/* mobile: single column */
+/* When open → text darker green */
+.faq-card.open .faq-header span {
+  color: #166534;
+}
+
+.faq-card.open .faq-body p {
+  color: #166534;
+}
+
+/* FAQ Responsive */
 @media (max-width: 992px) {
-  .faq-card {
-    flex: 1 1 100%;
+  .faq-grid {
+    grid-template-columns: 1fr;
   }
 
   .faq-section .section-header.center h2 {
@@ -1373,72 +1541,546 @@
 }
 
 /* =========================
-   RESPONSIVE
+   MOBILE OPTIMIZATIONS (TABLET)
    ========================= */
 
 @media (max-width: 1024px) {
-  .grid-4 {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .intl-slider .destination-card {
-    min-width: 280px;
-    max-width: 320px;
-  }
-}
-
-@media (max-width: 768px) {
   .hero {
-    height: 380px;
-    margin: 0.5rem 0 0;
-  }
-
-  .hero-content {
-    padding: 2rem 1.5rem;
+    height: 500px;
   }
 
   .hero-content h1 {
-    font-size: 2rem;
+    font-size: 3rem;
+  }
+
+  .hero-content .sub {
+    font-size: 1.1rem;
   }
 
   .section {
-    padding: 0 1rem;
-    margin: 2rem auto;
+    padding: 2rem 1.5rem;
+    margin: 1rem 0;
   }
 
-  .intl-hero-inner {
-    padding: 40px 16px 32px;
+  .grid-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.2rem;
   }
 
-  .intl-cards {
-    padding: 16px 16px 32px;
+  .intl-slider .destination-card,
+  .india-slider .destination-card {
+    min-width: 280px;
+    max-width: 320px;
   }
 
+  .story-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .story-main-image img {
+    max-width: 400px;
+  }
+
+  .story-text h2 {
+    font-size: 32px;
+  }
+
+  .story-text p {
+    font-size: 16px;
+  }
+
+  .why-section {
+    padding: 2rem 2rem;
+  }
+
+  .why-section .grid-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem;
+  }
+}
+
+/* =========================
+   MOBILE (768px and below)
+   ========================= */
+
+@media (max-width: 768px) {
+  .hero {
+    height: 400px;
+    margin: 0;
+  }
+
+  .hero-content {
+    padding: 1.5rem 1rem;
+  }
+
+  .hero-content h1 {
+    font-size: 1.75rem;
+    line-height: 1.15;
+    max-width: 100%;
+    margin-bottom: 0.75rem;
+  }
+
+  .hero-content .sub {
+    font-size: 0.875rem;
+    max-width: 100%;
+    margin: 0 auto 1rem;
+    line-height: 1.4;
+  }
+
+  /* Section padding – overridden from earlier */
+  .section {
+    padding: 1.25rem 1rem;
+    margin: 1.25rem 0;
+  }
+
+  .section-header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .section-header h2,
+  .section-header-text h2 {
+    font-size: 1.5rem;
+    line-height: 1.2;
+  }
+
+  .link-button {
+    font-size: 0.875rem;
+  }
+
+  /* New Year Section */
+  .newyear-section {
+    padding: 1.5rem 1rem;
+  }
+
+  .newyear-section .section-header {
+    margin-bottom: 1rem;
+  }
+
+  .newyear-section .section-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .newyear-section .bubble-row {
+    gap: 1rem;
+    padding: 0;
+  }
+
+  .newyear-section .bubble-img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .newyear-section .bubble-item {
+    min-width: 110px;
+  }
+
+  .newyear-section .bubble-text h3 {
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+  }
+
+  .newyear-section .bubble-text p {
+    font-size: 0.8rem;
+  }
+
+  /* Special Offers pills */
+  .card-row {
+    gap: 1.25rem;
+    padding: 0;
+  }
+
+  .pill-card {
+    min-width: 280px;
+  }
+
+  .pill-img {
+    width: 70px;
+    height: 70px;
+    flex: 0 0 70px;
+  }
+
+  .pill-body h3 {
+    font-size: 14px;
+  }
+
+  .pill-body p {
+    font-size: 12px;
+    max-width: 180px;
+  }
+
+  /* International / India */
+  .intl-section,
+  .india-section {
+    margin: 1.5rem 0;
+  }
+
+  .intl-hero,
+  .india-hero {
+    padding-bottom: 50px;
+  }
+
+  .intl-hero-inner,
+  .india-hero-inner {
+    padding: 1.5rem 1rem 1.5rem;
+  }
+
+  .intl-hero-inner h2,
+  .india-hero-inner h2 {
+    font-size: 1.5rem;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+
+  .intl-hero-inner p,
+  .india-hero-inner p {
+    font-size: 0.875rem;
+    max-width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .intl-hero-btn,
+  .india-hero-btn {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.875rem;
+  }
+
+  .intl-cards,
+  .india-cards {
+    margin-top: -50px;
+    padding: 0 1rem 1.5rem;
+  }
+
+  /* Hide slider arrows on mobile */
   .slider-btn {
-    display: none; /* use swipe on mobile */
+    display: none;
   }
 
-  .intl-slider .destination-card {
-    min-width: 260px;
-    max-width: 280px;
+  .intl-slider,
+  .india-slider {
+    gap: 1rem;
+    padding-bottom: 0.5rem;
+  }
+
+  /* Journeys Section */
+  .journeys-section {
+    padding: 1.5rem 1rem;
+  }
+
+  .journeys-section .section-header {
+    margin-bottom: 1rem;
+  }
+
+  .journeys-section .section-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .journeys-section .grid-4 {
+    gap: 1.25rem;
+  }
+
+  .journey-card {
+    padding: 0.5rem;
+  }
+
+  .journey-img img {
+    height: 160px;
+  }
+
+  .journey-body {
+    padding: 0.5rem 0.5rem 1rem;
+  }
+
+  .journey-body h3 {
+    font-size: 1.125rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .journey-body p {
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .journey-link {
+    font-size: 0.875rem;
+  }
+
+  .journey-link::after {
+    font-size: 1.5rem;
+  }
+
+  .journeys-section .section-footer-center {
+    margin-top: 1.25rem;
+  }
+
+  .journeys-cta {
+    padding: 0.875rem 1.5rem;
+    font-size: 0.875rem;
+  }
+
+  /* Story Section */
+  .story-section {
+    padding: 1.5rem 1rem;
+    margin: 1.5rem 0;
   }
 
   .story-grid {
     grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .story-image-container {
+    justify-content: center;
+  }
+
+  .story-main-image img {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .story-text h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    text-align: left;
+  }
+
+  .story-text p {
+    font-size: 0.875rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    text-align: left;
+  }
+
+  .vision-box {
+    padding: 1rem 1.25rem;
+    margin-top: 1rem;
+    border-left: none;
+    border-top: 4px solid #2b7600;
+  }
+
+  .vision-box h3 {
+    font-size: 1.125rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .vision-box p {
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+
+  /* Why Section */
+  .why-section {
+    padding: 1.5rem 1rem;
+  }
+
+  .why-section .section-header.center {
+    margin-bottom: 1rem;
+  }
+
+  .why-section .section-header.center h2 {
+    font-size: 1.5rem;
+  }
+
+  .why-section .grid-4 {
+    gap: 1.25rem;
+  }
+
+  .why-section .feature-card {
+    padding: 1.5rem 1.25rem 1.75rem;
+  }
+
+  .why-section .feature-icon {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 1rem;
+  }
+
+  .why-section .feature-card h3 {
+    font-size: 1.125rem;
+    margin-bottom: 0.375rem;
+  }
+
+  .why-section .feature-card p {
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+
+  /* FAQ Section */
+  .faq-section {
+    padding: 1.5rem 1rem 2.5rem;
+  }
+
+  .faq-section .section-header.center {
+    margin-bottom: 1rem;
+  }
+
+  .faq-section .section-header.center h2 {
+    font-size: 1.5rem;
+  }
+
+  .faq-grid {
+    width: 100%;
+    grid-template-columns: 1fr;
+    row-gap: 1rem;
+    column-gap: 0;
+  }
+
+  .faq-card {
+    padding: 0.875rem 1rem;
+    border-radius: 12px;
+  }
+
+  .faq-header span {
+    font-size: 0.9375rem;
+    line-height: 1.3;
+  }
+
+  .faq-icon {
+    font-size: 1.25rem;
+  }
+
+  .faq-body {
+    padding-right: 0;
+    margin-top: 0.5rem;
+  }
+
+  .faq-card.open .faq-body {
+    margin-top: 0.5rem;
+  }
+
+  .faq-body p {
+    font-size: 0.8125rem;
+    line-height: 1.5;
+  }
+
+  /* All single column on mobile */
+  .grid-4 {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  /* 👉 Better slider card sizing on mobile */
+  .intl-slider .destination-card,
+  .india-slider .destination-card {
+    min-width: 80vw;
+    max-width: 80vw;
+    height: auto;
+  }
+
+  .dest-img {
+    height: 180px;
+  }
+
+  .dest-body h3 {
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
+  }
+
+  .dest-body p {
+    font-size: 0.85rem;
+  }
+
+  .dest-footer .price {
+    font-size: 1.1rem;
+  }
+
+  .dest-footer .price small {
+    font-size: 0.875rem;
   }
 }
 
-@media (max-width: 640px) {
-  .grid-4 {
-    grid-template-columns: 1fr;
+/* =========================
+   SMALL MOBILE (480px and below)
+   ========================= */
+
+@media (max-width: 480px) {
+  .hero {
+    height: 350px;
   }
 
-  .card-row {
-    gap: 24px;
-    flex-wrap: wrap;
+  .hero-content h1 {
+    font-size: 1.5rem;
   }
 
-  .pill-card {
+  .hero-content .sub {
+    font-size: 0.8125rem;
+  }
+
+  .section {
+    padding: 1.25rem 0.875rem;
+  }
+
+  .section-header h2,
+  .section-header-text h2,
+  .newyear-section .section-header h2,
+  .journeys-section .section-header h2,
+  .why-section .section-header.center h2,
+  .faq-section .section-header.center h2 {
+    font-size: 1.375rem;
+  }
+
+  .intl-hero-inner,
+  .india-hero-inner {
+    padding: 1.25rem 0.875rem;
+  }
+
+  .intl-hero-inner h2,
+  .india-hero-inner h2 {
+    font-size: 1.375rem;
+  }
+
+  .intl-cards,
+  .india-cards {
+    padding: 0 0.875rem 1.25rem;
+  }
+
+  .intl-slider .destination-card,
+  .india-slider .destination-card {
+    min-width: 240px;
+    max-width: 260px;
+    height: 340px;
+  }
+
+  .dest-img {
+    height: 160px;
+  }
+
+  .dest-body h3 {
+    font-size: 1.125rem;
+  }
+
+  .newyear-section .bubble-img {
+    width: 90px;
+    height: 90px;
+  }
+
+  .newyear-section .bubble-item {
+    min-width: 100px;
+  }
+
+  .story-text h2 {
+    font-size: 1.375rem;
+  }
+
+  .why-section .feature-icon {
+    width: 60px;
+    height: 60px;
+  }
+
+  /* Extra FAQ tightening */
+  .faq-grid {
     width: 100%;
+    row-gap: 0.75rem;
+  }
+
+  .faq-card {
+    padding: 0.75rem 0.85rem;
+  }
+
+  .faq-header span {
+    font-size: 0.9rem;
   }
 }
