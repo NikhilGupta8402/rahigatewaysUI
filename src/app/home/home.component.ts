@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 
 interface DestinationCard {
   title: string;
@@ -282,7 +283,7 @@ export class HomeComponent implements AfterViewInit {
   // ... your existing arrays (specialOffers, internationalPackages, etc.)
   @ViewChild('heroVideo') heroVideo!: ElementRef<HTMLVideoElement>;
 
-  constructor(private renderer: Renderer2) {}
+  constructor(private renderer: Renderer2, private router: Router) {}
 
   ngAfterViewInit(): void {
     const video = this.heroVideo.nativeElement;
@@ -338,5 +339,10 @@ export class HomeComponent implements AfterViewInit {
 
   toggleFaq(index: number): void {
     this.openedFaqIndex = this.openedFaqIndex === index ? null : index;
+  }
+
+  goToPackageDetail(pkg: DestinationCard) {
+    // later you can pass an id/slug; for now just navigate
+    this.router.navigate(['/tour', 'goa-7-days']);
   }
 }

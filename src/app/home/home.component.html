@@ -109,7 +109,7 @@
 
       <!-- Horizontal slider -->
       <div class="india-slider" #indiaSlider>
-        <article class="destination-card" *ngFor="let pkg of indiaPackages">
+        <article class="destination-card" *ngFor="let pkg of indiaPackages" (click)="goToPackageDetail(pkg)">
           <div class="dest-img">
             <img [src]="pkg.imageUrl" [alt]="pkg.title" />
           </div>

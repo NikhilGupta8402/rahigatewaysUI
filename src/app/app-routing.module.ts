@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
+import { TourDetailComponent } from './tour-detail/tour-detail.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent }, // 👈 default route = home
-  { path: '**', redirectTo: '' },
+  { path: '', component: HomeComponent },
+  { path: 'tour/:slug', component: TourDetailComponent },
 ];
 
 @NgModule({

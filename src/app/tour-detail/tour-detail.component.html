@@ -1,0 +1,385 @@
+<div class="page-wrapper tour-detail-page">
+  <!-- TOP TITLE + GALLERY (FULL WIDTH) -->
+  <section class="tour-hero">
+    <div class="tour-title-block">
+      <h1>{{ tourTitle }}</h1>
+
+      <div class="tour-meta">
+        <span class="meta-rating">
+          <i class="ri-star-fill"></i>
+          {{ rating }}
+          <span class="meta-rating-count">({{ ratingCount }} reviews)</span>
+        </span>
+      </div>
+    </div>
+
+    <!-- GALLERY ONLY -->
+    <div class="tour-gallery">
+      <!-- LEFT BIG IMAGE -->
+      <div class="gallery-main" (click)="openImageModal(0, true)">
+        <img [src]="mainImage" alt="Tour main image" />
+      </div>
+
+      <!-- RIGHT 3 IMAGES (ONLY SHOW FIRST 3) -->
+      <div class="gallery-side">
+        <div
+          class="gallery-thumb"
+          *ngIf="galleryImages[0]"
+          (click)="openImageModal(1)"
+        >
+          <img [src]="galleryImages[0]" alt="Tour image 2" />
+        </div>
+
+        <div
+          class="gallery-thumb"
+          *ngIf="galleryImages[1]"
+          (click)="openImageModal(2)"
+        >
+          <img [src]="galleryImages[1]" alt="Tour image 3" />
+        </div>
+
+        <div
+          class="gallery-thumb overlay-thumb"
+          *ngIf="galleryImages[2]"
+          (click)="openImageModal(3)"
+        >
+          <img [src]="galleryImages[2]" alt="Tour image 4" />
+          <div class="overlay-count" *ngIf="totalImages > 4">
+            +{{ totalImages - 4 }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN 2-COLUMN LAYOUT: LEFT = CONTENT, RIGHT = BOOKING -->
+  <section class="tour-layout">
+    <div class="tour-main">
+      <!-- OVERVIEW -->
+      <section class="card-section">
+        <h2>Tour <span>Overview</span></h2>
+        <p>
+          Enjoy a complete 7-Day Goa experience with beach shacks, waterfalls,
+          nightlife, heritage sites, island trips, water sports and relaxed
+          resort stays. This is the perfect mix of fun, nature, culture and
+          comfort – ideal for friends, couples and families.
+        </p>
+
+        <div class="overview-highlight-grid">
+          <div class="overview-block">
+            <h3>Tour Highlights</h3>
+            <ul>
+              <li *ngFor="let h of highlights">{{ h }}</li>
+            </ul>
+          </div>
+          <!-- <div class="overview-block">
+            <h3>Best For</h3>
+            <ul>
+              <li>Friends & Groups</li>
+              <li>Honeymoon & Couples</li>
+              <li>Families with Teens</li>
+            </ul>
+          </div> -->
+        </div>
+      </section>
+
+      <!-- WHAT'S INCLUDED -->
+      <section class="card-section">
+        <h2 class="included-title">What's <span>included</span></h2>
+
+        <div class="included-grid">
+          <!-- LEFT COLUMN -->
+          <ul class="icon-list">
+            <li
+              *ngFor="
+                let inc of includes | slice : 0 : (includes.length + 1) / 2
+              "
+            >
+              <span class="icon-badge">
+                <i class="ri-check-line"></i>
+              </span>
+              <span>{{ inc }}</span>
+            </li>
+          </ul>
+
+          <!-- RIGHT COLUMN -->
+          <ul class="icon-list">
+            <li
+              *ngFor="let inc of includes | slice : (includes.length + 1) / 2"
+            >
+              <span class="icon-badge">
+                <i class="ri-check-line"></i>
+              </span>
+              <span>{{ inc }}</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+<!-- ITINERARY -->
+<!-- ITINERARY -->
+<section class="card-section">
+  <h2>Itinerary</h2>
+
+  <ol class="itinerary-list">
+    <li *ngFor="let day of itinerary; let i = index">
+      <!-- left timeline icon column -->
+      <div class="itinerary-icon-wrap">
+        <div
+          class="itinerary-icon-circle"
+          [ngClass]="{
+            'is-start': i === 0,
+            'is-end': i === itinerary.length - 1
+          }"
+        >
+          <!-- start icon: map pin -->
+          <i class="ri-map-pin-2-line" *ngIf="i === 0"></i>
+          <!-- end icon: check -->
+          <i class="ri-check-line" *ngIf="i === itinerary.length - 1"></i>
+        </div>
+      </div>
+
+      <!-- right text column -->
+      <div class="itinerary-text">
+        <h3>{{ day.day }} – {{ day.title }}</h3>
+        <p>{{ day.description }}</p>
+      </div>
+    </li>
+  </ol>
+</section>
+
+
+
+
+      <!-- MAP PLACEHOLDER -->
+      <section class="card-section">
+        <div class="section-header-inline">
+          <h2>Tour Map</h2>
+          <span class="map-note">*Exact route may vary</span>
+        </div>
+        <div class="map-placeholder">
+          <p>Map embedding goes here (Google Maps / Leaflet etc.)</p>
+        </div>
+      </section>
+
+<!-- FAQ -->
+<section class="card-section faq-section">
+  <h2>Frequently <span>Asked Questions</span></h2>
+
+  <div class="faq-list">
+    <div
+      class="faq-item"
+      *ngFor="let faq of faqs; let i = index"
+      [class.open]="openedFaqIndex === i"
+    >
+      <button
+        class="faq-header"
+        type="button"
+        (click)="toggleFaq(i)"
+        [attr.aria-expanded]="openedFaqIndex === i"
+      >
+        <span class="faq-question">{{ faq.question }}</span>
+        <i
+          class="ri-arrow-down-s-line faq-icon"
+        ></i>
+      </button>
+
+      <div class="faq-body">
+        <p>{{ faq.answer }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+      <!-- REVIEWS -->
+      <section class="card-section">
+        <div class="reviews-header">
+          <div>
+            <h2>Reviews</h2>
+            <p class="review-score">
+              <span class="score-number">{{ rating }}</span>
+              <span class="score-label">Very good</span>
+              <span class="score-count">
+                · {{ ratingCount }} total reviews
+              </span>
+            </p>
+          </div>
+        </div>
+
+        <div class="review-list">
+          <article class="review-card" *ngFor="let r of reviews">
+            <div class="review-meta">
+              <div class="review-avatar">
+                <img [src]="r.avatarUrl" [alt]="r.name" />
+              </div>
+              <div>
+                <h3>{{ r.name }}</h3>
+                <p class="review-date">{{ r.date }}</p>
+                <p class="review-rating">
+                  <i class="ri-star-fill"></i>
+                  {{ r.rating }} / 5
+                </p>
+              </div>
+            </div>
+            <p class="review-comment">
+              {{ r.comment }}
+            </p>
+
+            <div class="review-images" *ngIf="r.images?.length">
+              <img *ngFor="let img of r.images" [src]="img" alt="Trip photo" />
+            </div>
+          </article>
+        </div>
+      </section>
+    </div>
+
+    <!-- RIGHT: BOOKING CARD (NEXT TO CONTENT) -->
+    <aside class="booking-card booking-card-main">
+      <!-- top header: From 13K per person -->
+      <div class="booking-header-v2">
+        <span class="booking-header-label">From</span>
+        <span class="booking-header-price">{{ priceLabel }}</span>
+        <span class="booking-header-suffix">per person</span>
+      </div>
+
+      <p class="booking-header-note">*Price may vary by season & dates</p>
+
+      <div class="booking-panel">
+        <!-- FROM + TIME BIG BOX (two rows) -->
+        <div class="dt-box">
+          <!-- row 1: From -->
+          <div class="dt-row">
+            <div class="dt-icon">
+              <i class="ri-calendar-2-line"></i>
+            </div>
+
+            <div class="dt-body">
+              <span class="dt-label-strong">From</span>
+
+              <div class="dt-value-wrapper">
+                <span class="dt-placeholder" [class.has-value]="startDate">
+                  {{ formattedStartDate }}
+                </span>
+
+                <!-- invisible native input covering the row -->
+                <input type="date" class="dt-native" [(ngModel)]="startDate" />
+              </div>
+            </div>
+          </div>
+
+          <div class="dt-divider"></div>
+
+          <!-- row 2: Time -->
+          <div class="dt-row">
+            <div class="dt-icon">
+              <i class="ri-time-line"></i>
+            </div>
+
+            <div class="dt-body">
+              <span class="dt-label-strong">Time</span>
+
+              <div class="dt-value-wrapper">
+                <span class="dt-placeholder" [class.has-value]="startTime">
+                  {{ formattedStartTime }}
+                </span>
+
+                <!-- invisible native input covering the row -->
+                <input type="time" class="dt-native" [(ngModel)]="startTime" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TICKETS -->
+        <div class="booking-section">
+          <h4>Tickets</h4>
+
+          <div class="ticket-row">
+            <div class="ticket-text">
+              <div class="ticket-title">Adult (18+ years)</div>
+              <div class="ticket-sub">₹{{ adultPrice | number : "1.0-0" }}</div>
+            </div>
+            <div class="qty-control">
+              <button type="button" (click)="changeAdult(-1)">−</button>
+              <span>{{ adultCount }}</span>
+              <button type="button" (click)="changeAdult(1)">+</button>
+            </div>
+          </div>
+
+          <div class="ticket-row">
+            <div class="ticket-text">
+              <div class="ticket-title">Children (0–12 years)</div>
+              <div class="ticket-sub">₹{{ childPrice | number : "1.0-0" }}</div>
+            </div>
+            <div class="qty-control">
+              <button type="button" (click)="changeChild(-1)">−</button>
+              <span>{{ childCount }}</span>
+              <button type="button" (click)="changeChild(1)">+</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ADD EXTRA -->
+        <div class="booking-section">
+          <h4>Add Extra</h4>
+
+          <label class="extra-row">
+            <input type="checkbox" [(ngModel)]="addServicePerBooking" />
+            <span class="extra-label">Add Service per booking</span>
+            <span class="extra-price">
+              ₹{{ extraPerBooking | number : "1.0-0" }}
+            </span>
+          </label>
+
+          <label class="extra-row">
+            <input type="checkbox" [(ngModel)]="addServicePerPerson" />
+            <span class="extra-label">Add Service per person</span>
+            <span class="extra-price">
+              ₹{{ extraPerPerson | number : "1.0-0" }}
+            </span>
+          </label>
+        </div>
+
+        <!-- TOTAL -->
+        <div class="booking-total-row">
+          <span>Total:</span>
+          <span class="booking-total-amount">
+            ₹{{ grandTotal | number : "1.0-0" }}
+          </span>
+        </div>
+
+        <!-- CTA -->
+        <button class="booking-btn-cta" (click)="onBookNow()">Book Now</button>
+      </div>
+    </aside>
+  </section>
+
+  <!-- FLOATING IMAGE MODAL -->
+  <div class="image-modal" *ngIf="isModalOpen">
+    <div class="image-modal-backdrop" (click)="closeImageModal()"></div>
+
+    <div class="image-modal-content">
+      <button class="image-modal-close" (click)="closeImageModal()">×</button>
+
+      <button class="nav-btn nav-left" (click)="prevImage()">‹</button>
+
+      <img
+        [src]="modalImages[modalIndex]"
+        class="image-modal-main"
+        alt="Gallery image"
+      />
+
+      <button class="nav-btn nav-right" (click)="nextImage()">›</button>
+
+      <div class="image-modal-thumbs">
+        <img
+          *ngFor="let img of modalImages; let i = index"
+          [src]="img"
+          [class.active]="i === modalIndex"
+          (click)="selectImage(i)"
+        />
+      </div>
+    </div>
+  </div>
+</div>
