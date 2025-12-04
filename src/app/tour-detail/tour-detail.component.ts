@@ -40,7 +40,7 @@ export class TourDetailComponent {
   galleryImages: string[] = [
     'assets/images/goa-detail-2.png',
     'assets/images/goa-detail-3.png',
-    'assets/images/goa-detail-4.png',
+    'assets/images/goa-detail-4.jpg',
     'assets/images/goa-detail-5.png',
     'assets/images/goa-detail-6.png',
   ];
