@@ -18,6 +18,46 @@
   gap: 16px;
   margin-bottom: 32px;
 }
+/* header row: title left, share right */
+.tour-hero-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+/* share button */
+.hero-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 0.98rem;
+  color: #166534;
+  font-weight: 500;
+  padding: 6px 0;
+}
+
+.hero-action-btn i {
+  font-size: 1.2rem;
+}
+
+.hero-action-btn:hover {
+  color: #14532d;
+  text-decoration: underline;
+}
+
+/* stack on mobile */
+@media (max-width: 768px) {
+  .tour-hero-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
+
 
 .tour-title-block h1 {
   font-size: 2.6rem;
@@ -28,9 +68,11 @@
 }
 
 .tour-meta {
+  flex-wrap: wrap;
   display: flex;
-  gap: 8px;
-  align-items: center;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
 }
 
 .meta-rating {
@@ -68,7 +110,6 @@
 .gallery-main {
   position: relative;
   overflow: hidden;
-  /* border-radius: 16px;    */
   cursor: pointer;
   transition: transform 0.2s ease;
 }
@@ -95,7 +136,6 @@
   position: relative;
   overflow: hidden;
   cursor: pointer;
-  /* border-radius: 12px; */
   transition: transform 0.2s ease;
 }
 
@@ -151,11 +191,9 @@
 .card-section {
   background: #ffffff;
   border-radius: 18px;
-  /* padding: 22px 24px; */
-  padding-right:94px;
-  border: none;
+  /* padding: 22px 24px;   */
+  padding-right: 130px;
   margin-bottom: 18px;
-  /* box-shadow: 0 10px 25px rgba(15, 23, 42, 0.04); */
 }
 
 .card-section h2 {
@@ -209,14 +247,14 @@
 }
 
 .included-title span {
-  color: #166534;            /* green word “included” */
+  color: #166534;
 }
 
 /* two equal columns */
 .included-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  column-gap: 80px;          /* adjust spacing between columns */
+  column-gap: 80px;
 }
 
 /* list + items */
@@ -226,13 +264,13 @@
   margin: 10px 0 20px 0;
   display: flex;
   flex-direction: column;
-  gap: 14px;                 /* more vertical spacing like ref image */
+  gap: 14px;
   font-size: 1.06rem;
   color: #7a747e;
 }
 
 .icon-list li {
-    margin-bottom: 5px;
+  margin-bottom: 5px;
   display: flex;
   align-items: center;
   line-height: 1.6;
@@ -261,9 +299,6 @@
   color: #ef4444;
 }
 
-
-/* ---------- ITINERARY (timeline style) ---------- */
-
 /* ---------- ITINERARY (timeline style) ---------- */
 
 .itinerary-list {
@@ -283,8 +318,7 @@
 .itinerary-list li::before {
   content: "";
   position: absolute;
-  left: 12px;     
-              /* line passes through circle centre */
+  left: 12px;
   top: 0;
   bottom: 0;
   border-left: 2px dashed #2b7600;
@@ -303,12 +337,10 @@
 
 /* left column that holds the circle */
 .itinerary-icon-wrap {
-  /* width: 8px;     */
-             /* distance from edge to text */
   display: flex;
   justify-content: center;
   position: relative;
-  z-index: 1;                  /* keep above dashed line */
+  z-index: 1;
 }
 
 /* base circle style (middle days) */
@@ -343,7 +375,7 @@
   font-size: 1.3rem;
   margin: 0 0 0px;
   font-weight: 690;
-  color: #173404;             /* dark green heading */
+  color: #173404;
 }
 
 .itinerary-text p {
@@ -351,8 +383,6 @@
   line-height: 1.6;
   color: #7a747e;
 }
-
-
 
 /* map */
 
@@ -383,7 +413,7 @@
 
 .faq-section h2 {
   font-size: 1.9rem;
-  margin-bottom: 12px;           /* deep green like reference headline */
+  margin-bottom: 12px;
 }
 
 .faq-list {
@@ -398,7 +428,6 @@
   border-radius: 14px;
   border: 1px solid #e5e7eb;
   background: #ffffff;
-  /* box-shadow: 0 12px 30px rgba(15, 23, 42, 0.03); */
   overflow: hidden;
 }
 
@@ -435,7 +464,7 @@
   transition: transform 0.2s ease, color 0.2s ease;
 }
 
-/* when open: white bg, subtle border between header & body, arrow up + green */
+/* when open */
 .faq-item.open .faq-header {
   background: #fafef7;
   border-bottom: 1px solid #f3f4f6;
@@ -461,12 +490,11 @@
 
 /* expanded body */
 .faq-item.open .faq-body {
-  max-height: 260px;            /* enough for 3–4 lines; increase if needed */
+  max-height: 260px;
   padding: 10px 18px 14px;
 }
 
-
-/* Reviews */
+/* Reviews (if you re-enable) */
 
 .reviews-header {
   display: flex;
@@ -582,8 +610,7 @@
   border: 1px solid #f1f5f9;
   box-shadow: 0 18px 40px rgba(15, 23, 42, 0.09);
   padding: 18px 20px 20px;
-  /* position: sticky; */
-  top: 20px; 
+  top: 20px;
 }
 
 .booking-card-main {
@@ -602,7 +629,7 @@
 }
 
 .booking-header-label {
-  font-size: 1.0rem;
+  font-size: 1rem;
   color: #6b7280;
 }
 
@@ -627,7 +654,6 @@
   display: flex;
   flex-direction: column;
   margin: 15px;
-  /* gap: 14px; */
 }
 
 /* FROM / TIME BOX */
@@ -712,7 +738,6 @@
   height: 100%;
 }
 
-/* hide default chrome indicators but keep clickability */
 .dt-native::-webkit-calendar-picker-indicator,
 .dt-native::-webkit-inner-spin-button {
   opacity: 0;
@@ -728,7 +753,6 @@
 
 .booking-section {
   border-top: 1px solid #f1f5f9;
-  /* padding-top: 10px; */
 }
 
 .booking-section h4 {
@@ -819,7 +843,6 @@
 }
 
 .extra-label {
-    
   color: #111827;
 }
 
@@ -860,7 +883,6 @@
 
 .booking-btn-cta:hover {
   background: #235e00;
-  
   box-shadow: 0 4px 12px rgba(27, 143, 70, 0.3);
 }
 
@@ -1007,22 +1029,32 @@
 /* ---------- RESPONSIVE ---------- */
 
 @media (max-width: 1024px) {
+  .page-wrapper.tour-detail-page {
+    padding: 14px 16px 20px;
+  }
+
   .tour-layout {
     grid-template-columns: 1fr;
+    gap: 16px;
   }
 
   .booking-card-main {
     max-width: 100%;
-    position: relative;
-    top: 0;
+    margin-left: 0;
+    margin-top: 4px;
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
   }
 
   .tour-gallery {
     grid-template-columns: 1fr;
   }
 
+  .gallery-main,
   .gallery-side {
-    height: auto;
+    height: 360px;
+  }
+
+  .gallery-side {
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: auto;
   }
@@ -1047,14 +1079,18 @@
     gap: 24px;
   }
 
-  .two-column {
-    grid-template-columns: 1fr;
+  .included-grid {
+    column-gap: 32px;
   }
 }
 
 @media (max-width: 768px) {
   .tour-title-block h1 {
-    font-size: 1.8rem;
+    font-size: 1.9rem;
+  }
+
+  .tour-meta {
+    font-size: 0.95rem;
   }
 
   .gallery-main,
@@ -1064,6 +1100,40 @@
 
   .card-section {
     padding: 16px 18px;
+  }
+
+  .itinerary-text h3 {
+    font-size: 1.15rem;
+  }
+
+  .itinerary-text p {
+    font-size: 0.98rem;
+  }
+
+  .included-grid {
+    grid-template-columns: 1fr;
+    row-gap: 16px;
+  }
+
+  .booking-panel {
+    margin: 10px 4px 0;
+  }
+
+  .booking-section h4 {
+    font-size: 1.15rem;
+  }
+
+  .faq-section h2 {
+    font-size: 1.5rem;
+  }
+
+  .faq-header {
+    padding: 16px 14px;
+    font-size: 1rem;
+  }
+
+  .faq-body {
+    font-size: 0.9rem;
   }
 
   .image-modal-content {
@@ -1087,5 +1157,58 @@
 
   .nav-right {
     right: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-wrapper.tour-detail-page {
+    padding: 12px;
+  }
+
+  .tour-hero {
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .tour-title-block h1 {
+    font-size: 1.6rem;
+  }
+
+  .gallery-main,
+  .gallery-side {
+    height: auto;
+    min-height: 220px;
+  }
+
+  .card-section {
+    padding: 14px 14px;
+    border-radius: 14px;
+  }
+
+  .booking-card {
+    padding: 14px 14px 16px;
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+  }
+
+  .booking-header-price {
+    font-size: 1.35rem;
+  }
+
+  .ticket-row {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .faq-item.open .faq-body {
+    max-height: none;    /* allow full content on very small screens */
+  }
+
+  .itinerary-list li::before {
+    left: 10px;
+  }
+
+  .itinerary-icon-circle {
+    width: 22px;
+    height: 22px;
   }
 }

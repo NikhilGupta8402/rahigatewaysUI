@@ -292,4 +292,26 @@ export class TourDetailComponent {
     const mStr = m.toString().padStart(2, '0');
     return `${h}:${mStr} ${suffix}`;
   }
+  async onShare(): Promise<void> {
+    const url = window.location.href;
+    const title = this.tourTitle;
+    const text = `Check out this tour: ${this.tourTitle}`;
+
+    if ((navigator as any).share) {
+      try {
+        await (navigator as any).share({ title, text, url });
+      } catch (err) {
+        console.error('Share cancelled or failed', err);
+      }
+    } else if (navigator.clipboard && navigator.clipboard.writeText) {
+      try {
+        await navigator.clipboard.writeText(url);
+        alert('Link copied to clipboard!');
+      } catch (err) {
+        console.error('Clipboard failed', err);
+      }
+    } else {
+      alert('Sharing is not supported in this browser.');
+    }
+  }
 }
