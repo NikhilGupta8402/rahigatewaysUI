@@ -1,0 +1,37 @@
+<!-- src/app/auth/admin-login.component.html -->
+<div class="admin-login-wrapper">
+  <div class="admin-login-card">
+    <h1>Admin Sign In</h1>
+    <p class="subtitle">Only authorized admins can access this panel.</p>
+
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label>Email</label>
+        <input
+          type="email"
+          [(ngModel)]="email"
+          name="email"
+          required
+          placeholder="admin@rahigateways.com"
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Password</label>
+        <input
+          type="password"
+          [(ngModel)]="password"
+          name="password"
+          required
+          placeholder="Enter password"
+        />
+      </div>
+
+      <div *ngIf="error" class="error-text">{{ error }}</div>
+
+      <button type="submit" [disabled]="loading">
+        {{ loading ? 'Signing in...' : 'Sign In' }}
+      </button>
+    </form>
+  </div>
+</div>

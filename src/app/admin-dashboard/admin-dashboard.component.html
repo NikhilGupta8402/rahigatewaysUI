@@ -1,0 +1,339 @@
+<!-- src/app/admin/admin-dashboard.component.html -->
+<div class="admin-layout">
+  <!-- SIDEBAR -->
+  <aside class="admin-sidebar">
+    <div class="admin-logo">
+      <span>Rahi Admin</span>
+    </div>
+
+    <nav>
+      <button class="nav-item" [class.active]="activeTab === 'destinations'" (click)="setTab('destinations')">
+        Destinations
+      </button>
+
+      <button class="nav-item" [class.active]="activeTab === 'packages'" (click)="setTab('packages')">
+        Packages
+      </button>
+
+      <button class="nav-item" [class.active]="activeTab === 'bookings'" (click)="setTab('bookings')">
+        Bookings
+      </button>
+    </nav>
+
+    <button class="logout-btn" (click)="logout()">Logout</button>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="admin-main">
+    <header class="admin-header">
+      <h1>Admin Dashboard</h1>
+      <p>Manage destinations, packages and bookings.</p>
+    </header>
+
+    <!-- DESTINATIONS -->
+    <section class="admin-section" *ngIf="activeTab === 'destinations'">
+      <h2>Destinations</h2>
+
+      <div class="card">
+        <div class="card-header-inline">
+          <h3>{{ editingDestinationId ? 'Edit Destination' : 'Create New Destination' }}</h3>
+        </div>
+
+        <form (ngSubmit)="onSubmitDestinationForm()" class="admin-form">
+          <div class="form-row">
+            <label>
+              Country
+              <input type="text" [(ngModel)]="destinationForm.country" name="country" placeholder="India" />
+            </label>
+
+            <label>
+              City
+              <input type="text" [(ngModel)]="destinationForm.city" name="city" placeholder="Goa" />
+            </label>
+          </div>
+
+          <div class="form-row">
+            <label class="full-width">
+              Description
+              <textarea [(ngModel)]="destinationForm.description" name="description" rows="3" placeholder="Describe the destination..."></textarea>
+            </label>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn-primary">{{ editingDestinationId ? 'Update Destination' : 'Create Destination' }}</button>
+            <button *ngIf="editingDestinationId" type="button" class="btn-secondary" (click)="resetDestinationForm()">Cancel</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="card mt-24">
+        <div class="card-header-inline">
+          <h3>All Destinations</h3>
+          <span *ngIf="loadingDestinations">Loading...</span>
+        </div>
+
+        <table class="admin-table" *ngIf="!loadingDestinations">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Country</th>
+              <th>City</th>
+              <th>Description</th>
+              <th style="width: 150px;">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let d of destinations">
+              <td>{{ d.destinationID }}</td>
+              <td>{{ d.country }}</td>
+              <td>{{ d.city }}</td>
+              <td>{{ d.description }}</td>
+              <td>
+                <button class="btn-small" (click)="onEditDestination(d)">Edit</button>
+                <button class="btn-small danger" (click)="onDeleteDestination(d)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- PACKAGES -->
+    <section class="admin-section" *ngIf="activeTab === 'packages'">
+      <h2>Packages</h2>
+
+      <!-- package form -->
+      <div class="card">
+        <div class="card-header-inline"><h3>{{ editingPackageId ? 'Edit Package' : 'Create New Package' }}</h3></div>
+
+        <form (ngSubmit)="onSubmitPackageForm()" class="admin-form">
+          <div class="form-row">
+            <label>
+              Package ID
+              <input type="text" [(ngModel)]="packageForm.packageID" name="packageID" [readonly]="editingPackageId" placeholder="goa-7-days" />
+            </label>
+
+            <label>
+              Package Name
+              <input type="text" [(ngModel)]="packageForm.packageName" name="packageName" placeholder="7 Days Goa Explore Tour" />
+            </label>
+          </div>
+
+          <div class="form-row">
+            <label class="full-width">
+              Description
+              <textarea [(ngModel)]="packageForm.description" name="description" rows="3" placeholder="Short description of the package"></textarea>
+            </label>
+          </div>
+
+          <div class="form-row">
+            <label>
+              Cost (₹)
+              <input type="number" [(ngModel)]="packageForm.cost" name="cost" min="0" />
+            </label>
+
+            <label>
+              Package Image
+              <input type="file" accept="image/*" (change)="onPackageImageSelected($event)" />
+              <small class="hint">{{ editingPackageId ? 'Leave empty to keep current image.' : 'Choose an image for this package.' }}</small>
+            </label>
+          </div>
+
+          <div class="form-row">
+            <label class="full-width">
+              Destinations
+              <select multiple (change)="onDestinationSelectChange($event)" [size]="(destinations.length || 4) > 6 ? 6 : (destinations.length || 4)">
+                <option *ngFor="let d of destinations" [value]="d.destinationID" [selected]="packageForm.destinationIds.includes(d.destinationID ?? -1) || false">
+                  {{ d.city }}, {{ d.country }}
+                </option>
+              </select>
+              <small class="hint">Use Ctrl / Cmd to select multiple.</small>
+            </label>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn-primary">{{ editingPackageId ? 'Update Package' : 'Create Package' }}</button>
+            <button *ngIf="editingPackageId" type="button" class="btn-secondary" (click)="resetPackageForm()">Cancel</button>
+            <button *ngIf="editingPackageId" type="button" class="btn-secondary" (click)="openDetailEditor()" style="margin-left:8px;">
+              {{ detailExists ? 'Edit Package Details' : 'Add Package Details' }}
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- package detail editor -->
+      <div class="card mt-16" *ngIf="editingDetailVisible">
+        <div class="card-header-inline">
+          <h3>Package Detail — {{ editingPackageId }}</h3>
+          <div>
+            <button class="btn-small" (click)="savePackageDetail()">Save Details</button>
+            <button class="btn-small danger" *ngIf="detailExists" (click)="deletePackageDetail()">Delete Details</button>
+            <button class="btn-small" (click)="editingDetailVisible = false">Close</button>
+          </div>
+        </div>
+
+        <div class="admin-form">
+          <div class="form-row">
+            <label>
+              Title
+              <input type="text" [(ngModel)]="packageDetailForm.tourTitle" name="tourTitle" />
+            </label>
+
+            <label>
+              Location
+              <input type="text" [(ngModel)]="packageDetailForm.location" name="location" />
+            </label>
+          </div>
+
+          <div class="form-row">
+            <label>
+              Duration Label
+              <input type="text" [(ngModel)]="packageDetailForm.durationLabel" name="durationLabel" />
+            </label>
+
+            <label>
+              Price per person
+              <input type="number" [(ngModel)]="packageDetailForm.pricePerPerson" name="pricePerPerson" />
+            </label>
+          </div>
+
+          <div class="form-row">
+            <label>
+              Main Image
+              <input type="file" accept="image/*" (change)="onMainImageSelected($event)" />
+              <small *ngIf="packageDetailForm.mainImage" class="hint">Main image loaded.</small>
+            </label>
+
+            <label>
+              Gallery Images
+              <input type="file" accept="image/*" multiple (change)="onGallerySelected($event)" />
+              <small class="hint">Selecting files appends to gallery</small>
+            </label>
+          </div>
+
+          <div class="form-row">
+            <label class="full-width">
+              Overview (HTML/markdown allowed)
+              <textarea [(ngModel)]="packageDetailForm.overviewText" name="overviewText" rows="4"></textarea>
+            </label>
+          </div>
+
+          <div class="form-row">
+            <label class="full-width">
+              Highlights (one per line)
+              <textarea [(ngModel)]="highlightsText" name="highlightsText" rows="3" placeholder="One highlight per line"></textarea>
+            </label>
+          </div>
+
+          <div class="form-row">
+            <label class="full-width">
+              Includes (one per line)
+              <textarea [(ngModel)]="includesText" name="includesText" rows="3"></textarea>
+            </label>
+          </div>
+
+          <div class="form-row">
+            <label class="full-width">
+              Not Includes (one per line)
+              <textarea [(ngModel)]="notIncludesText" name="notIncludesText" rows="3"></textarea>
+            </label>
+          </div>
+
+          <div class="form-row">
+            <label class="full-width">
+              Itinerary (one per line: Day | Title | Description)
+              <textarea [(ngModel)]="itineraryText" name="itineraryText" rows="3"></textarea>
+            </label>
+          </div>
+
+          <div class="form-row">
+            <label class="full-width">
+              FAQs (one per line: Question|Answer)
+              <textarea [(ngModel)]="faqsText" name="faqsText" rows="3"></textarea>
+            </label>
+          </div>
+
+          <!-- gallery preview -->
+          <div class="form-row" *ngIf="packageDetailForm.galleryImages?.length">
+            <label class="full-width">Gallery Preview</label>
+            <div class="gallery-grid">
+              <div class="gallery-thumb-wrap" *ngFor="let g of packageDetailForm.galleryImages; let i = index">
+                <img [src]="'data:image/jpeg;base64,' + g" alt="thumb" />
+                <button type="button" (click)="removeGalleryImage(i)">X</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- packages table -->
+      <div class="card mt-24">
+        <div class="card-header-inline"><h3>All Packages</h3><span *ngIf="loadingPackages">Loading...</span></div>
+
+        <table class="admin-table" *ngIf="!loadingPackages">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Cost</th>
+              <th>Destinations</th>
+              <th>Image</th>
+              <th style="width: 170px;">Actions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let p of packages">
+              <td>{{ p.packageID }}</td>
+              <td>{{ p.packageName }}</td>
+              <td>₹{{ p.cost }}</td>
+              <td>
+                <span *ngIf="p.destinationNames?.length; else noDest">{{ p.destinationNames?.join(', ') }}</span>
+                <ng-template #noDest>—</ng-template>
+              </td>
+              <td>
+                <img *ngIf="p.imageDataBase64" [src]="'data:image/jpeg;base64,' + p.imageDataBase64" [alt]="p.packageName" style="width:80px;height:60px;object-fit:cover;border-radius:6px;" />
+              </td>
+              <td>
+                <button class="btn-small" (click)="onEditPackage(p)">Edit</button>
+                <button class="btn-small" (click)="onEditPackage(p); openDetailEditor()">Edit Details</button>
+                <button class="btn-small danger" (click)="onDeletePackage(p)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- BOOKINGS -->
+    <section class="admin-section" *ngIf="activeTab === 'bookings'">
+      <h2>Bookings</h2>
+
+      <div class="card">
+        <div class="card-header-inline">
+          <h3>Recent Bookings</h3>
+          <span *ngIf="loadingBookings">Loading...</span>
+        </div>
+
+        <table class="admin-table" *ngIf="!loadingBookings">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Date</th>
+              <th>Seats</th>
+              <th>Total Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let b of bookings">
+              <td>{{ b.bookingID }}</td>
+              <td>{{ b.bookingDate }}</td>
+              <td>{{ b.numberOfSeats }}</td>
+              <td>₹{{ b.totalAmount }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</div>
