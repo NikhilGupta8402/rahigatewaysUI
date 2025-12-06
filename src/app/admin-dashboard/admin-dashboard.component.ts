@@ -21,6 +21,10 @@ export class AdminDashboardComponent implements OnInit {
   // -------- TABS ----------
   activeTab: AdminTab = 'destinations';
 
+  // -------- MODAL STATES ----------
+  showDestinationModal = false;
+  showPackageModal = false;
+
   // -------- DESTINATIONS ----------
   destinations: Destination[] = [];
   loadingDestinations = false;
@@ -88,6 +92,33 @@ export class AdminDashboardComponent implements OnInit {
     if (tab !== 'packages') this.editingDetailVisible = false;
   }
 
+  // ---------------- MODAL CONTROLS ----------------
+  openDestinationModal() {
+    this.resetDestinationForm();
+    this.showDestinationModal = true;
+  }
+
+  closeDestinationModal(event?: Event) {
+    if (event) event.preventDefault();
+    this.showDestinationModal = false;
+    this.resetDestinationForm();
+  }
+
+  openPackageModal() {
+    this.resetPackageForm();
+    this.showPackageModal = true;
+  }
+
+  closePackageModal(event?: Event) {
+    if (event) event.preventDefault();
+    this.showPackageModal = false;
+  }
+
+  closeDetailModal(event?: Event) {
+    if (event) event.preventDefault();
+    this.editingDetailVisible = false;
+  }
+
   // ---------------- DESTINATIONS ----------------
   loadDestinations() {
     this.loadingDestinations = true;
@@ -116,6 +147,7 @@ export class AdminDashboardComponent implements OnInit {
       city: dest.city,
       description: dest.description,
     };
+    this.showDestinationModal = true;
   }
 
   onDeleteDestination(dest: Destination) {
@@ -139,7 +171,7 @@ export class AdminDashboardComponent implements OnInit {
         .subscribe({
           next: () => {
             this.loadDestinations();
-            this.resetDestinationForm();
+            this.closeDestinationModal();
           },
           error: (err) => console.error('Error updating destination', err),
         });
@@ -147,7 +179,7 @@ export class AdminDashboardComponent implements OnInit {
       this.adminService.createDestination(payload).subscribe({
         next: () => {
           this.loadDestinations();
-          this.resetDestinationForm();
+          this.closeDestinationModal();
         },
         error: (err) => console.error('Error creating destination', err),
       });
@@ -197,6 +229,7 @@ export class AdminDashboardComponent implements OnInit {
       imageUrl: pkg.imageUrl,
     };
     this.selectedPackageImageFile = null;
+    this.showPackageModal = true;
     this.editingDetailVisible = false;
     this.packageDetailForm = this.emptyDetail();
     this.detailExists = false;
@@ -249,7 +282,8 @@ export class AdminDashboardComponent implements OnInit {
             };
             this.selectedPackageImageFile = null;
 
-            // Open package detail editor immediately so admin can fill details
+            // Close package modal and open detail editor
+            this.showPackageModal = false;
             this.editingDetailVisible = true;
             this.loadPackageDetail(this.editingPackageId);
           },
@@ -282,6 +316,8 @@ export class AdminDashboardComponent implements OnInit {
             imageUrl: updated.imageUrl,
           };
           this.selectedPackageImageFile = null;
+          this.showPackageModal = false;
+          alert('Package updated successfully!');
         },
         error: (err) => {
           console.error('Error updating package', err);
@@ -335,6 +371,7 @@ export class AdminDashboardComponent implements OnInit {
       alert('Open or create a package first to edit its details.');
       return;
     }
+    this.showPackageModal = false;
     this.editingDetailVisible = true;
     this.loadPackageDetail(this.editingPackageId);
   }
