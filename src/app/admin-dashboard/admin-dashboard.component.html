@@ -1,37 +1,53 @@
-<!-- src/app/admin/admin-dashboard.component.html -->
+<!-- admin-dashboard.component.html -->
 <div class="admin-layout">
   <!-- SIDEBAR -->
-  <aside class="admin-sidebar">
-    <div class="admin-logo">
+  <aside class="admin-sidebar" role="navigation" aria-label="Admin sidebar">
+    <div class="admin-logo" aria-hidden="false">
       <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M16 2L3 9L16 16L29 9L16 2Z" fill="currentColor" opacity="0.8"/>
         <path d="M3 14L16 21L29 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
         <path d="M3 19L16 26L29 19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
       </svg>
-      <span>Rahi Admin</span>
+      <span class="logo-text">Rahi Admin</span>
     </div>
 
     <nav>
-      <button class="nav-item" [class.active]="activeTab === 'destinations'" (click)="setTab('destinations')">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <button
+        class="nav-item"
+        [class.active]="activeTab === 'destinations'"
+        [attr.aria-pressed]="activeTab === 'destinations'"
+        (click)="setTab('destinations')"
+        title="Destinations"
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
           <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
           <circle cx="12" cy="10" r="3"></circle>
         </svg>
         <span>Destinations</span>
       </button>
 
-      <button class="nav-item" [class.active]="activeTab === 'packages'" (click)="setTab('packages')">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <button
+        class="nav-item"
+        [class.active]="activeTab === 'packages'"
+        [attr.aria-pressed]="activeTab === 'packages'"
+        (click)="setTab('packages')"
+        title="Packages"
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
           <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
-          <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-          <line x1="12" y1="22.08" x2="12" y2="12"></line>
         </svg>
         <span>Packages</span>
       </button>
 
-      <button class="nav-item" [class.active]="activeTab === 'bookings'" (click)="setTab('bookings')">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+      <button
+        class="nav-item"
+        [class.active]="activeTab === 'bookings'"
+        [attr.aria-pressed]="activeTab === 'bookings'"
+        (click)="setTab('bookings')"
+        title="Bookings"
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <rect x="3" y="4" width="18" height="18" rx="2"></rect>
           <line x1="16" y1="2" x2="16" y2="6"></line>
           <line x1="8" y1="2" x2="8" y2="6"></line>
           <line x1="3" y1="10" x2="21" y2="10"></line>
@@ -40,8 +56,8 @@
       </button>
     </nav>
 
-    <button class="logout-btn" (click)="logout()">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <button class="logout-btn" (click)="logout()" title="Logout" aria-label="Logout">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
         <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
         <polyline points="16 17 21 12 16 7"></polyline>
         <line x1="21" y1="12" x2="9" y2="12"></line>
@@ -51,41 +67,40 @@
   </aside>
 
   <!-- MAIN -->
-  <main class="admin-main">
-    <header class="admin-header">
-      <div>
+  <main class="admin-main" role="main">
+    <header class="admin-header" role="banner">
+      <div class="header-left">
         <h1>Admin Dashboard</h1>
         <p>Manage your travel packages, destinations, and bookings efficiently</p>
       </div>
+      <div class="header-actions">
+        <button class="btn-add" (click)="openPackageModal()">Quick create package</button>
+      </div>
     </header>
 
-    <!-- DESTINATIONS TAB -->
+    <!-- DESTINATIONS -->
     <section class="admin-section" *ngIf="activeTab === 'destinations'">
       <div class="section-header">
         <h2>
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
             <circle cx="12" cy="10" r="3"></circle>
           </svg>
           Destinations
         </h2>
-        <button class="btn-add" (click)="openDestinationModal()">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="12" y1="5" x2="12" y2="19"></line>
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-          </svg>
-          Add Destination
-        </button>
+        <div>
+          <button class="btn-add" (click)="openDestinationModal()">Add Destination</button>
+        </div>
       </div>
 
-      <div class="card">
+      <div class="card elevated">
         <div class="card-header">
           <h3>All Destinations</h3>
           <span *ngIf="loadingDestinations" class="loading">Loading...</span>
         </div>
 
         <div class="table-wrapper">
-          <table class="admin-table" *ngIf="!loadingDestinations">
+          <table class="admin-table" *ngIf="!loadingDestinations" aria-describedby="destinations-table">
             <thead>
               <tr>
                 <th>ID</th>
@@ -100,7 +115,7 @@
                 <td><span class="id-badge">{{ d.destinationID }}</span></td>
                 <td><strong>{{ d.country }}</strong></td>
                 <td>{{ d.city }}</td>
-                <td>{{ d.description }}</td>
+                <td class="truncate-cell">{{ d.description }}</td>
                 <td>
                   <button class="btn-table btn-edit" (click)="onEditDestination(d)">Edit</button>
                   <button class="btn-table btn-delete" (click)="onDeleteDestination(d)">Delete</button>
@@ -108,31 +123,29 @@
               </tr>
             </tbody>
           </table>
+
+          <div *ngIf="!loadingDestinations && destinations.length === 0" class="empty-state">
+            No destinations yet — click <button class="link-like" (click)="openDestinationModal()">Add Destination</button> to get started.
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- PACKAGES TAB -->
+    <!-- PACKAGES -->
     <section class="admin-section" *ngIf="activeTab === 'packages'">
       <div class="section-header">
         <h2>
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
-            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-            <line x1="12" y1="22.08" x2="12" y2="12"></line>
           </svg>
           Travel Packages
         </h2>
-        <button class="btn-add" (click)="openPackageModal()">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="12" y1="5" x2="12" y2="19"></line>
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-          </svg>
-          Add Package
-        </button>
+        <div>
+          <button class="btn-add" (click)="openPackageModal()">Add Package</button>
+        </div>
       </div>
 
-      <div class="card">
+      <div class="card elevated">
         <div class="card-header">
           <h3>All Packages</h3>
           <span *ngIf="loadingPackages" class="loading">Loading...</span>
@@ -155,13 +168,13 @@
                 <td><span class="id-badge">{{ p.packageID }}</span></td>
                 <td><strong>{{ p.packageName }}</strong></td>
                 <td><span class="price-badge">₹{{ p.cost }}</span></td>
-                <td>
+                <td class="dest-list">
                   <span *ngIf="p.destinationNames?.length; else noDest">{{ p.destinationNames?.join(', ') }}</span>
                   <ng-template #noDest><span class="text-muted">—</span></ng-template>
                 </td>
                 <td>
                   <img *ngIf="p.imageDataBase64" [src]="'data:image/jpeg;base64,' + p.imageDataBase64" [alt]="p.packageName" class="table-img" />
-                  <span *ngIf="!p.imageDataBase64" class="text-muted">No image</span>
+                  <span *ngIf="!p.imageDataBase64" class="text-muted small">No image</span>
                 </td>
                 <td>
                   <button class="btn-table btn-edit" (click)="onEditPackage(p)">Edit</button>
@@ -171,25 +184,26 @@
               </tr>
             </tbody>
           </table>
+
+          <div *ngIf="!loadingPackages && packages.length === 0" class="empty-state">
+            No packages yet — create one using <button class="link-like" (click)="openPackageModal()">Add Package</button>.
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- BOOKINGS TAB -->
+    <!-- BOOKINGS -->
     <section class="admin-section" *ngIf="activeTab === 'bookings'">
       <div class="section-header">
         <h2>
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-            <line x1="16" y1="2" x2="16" y2="6"></line>
-            <line x1="8" y1="2" x2="8" y2="6"></line>
-            <line x1="3" y1="10" x2="21" y2="10"></line>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <rect x="3" y="4" width="18" height="18" rx="2"></rect>
           </svg>
           Bookings
         </h2>
       </div>
 
-      <div class="card">
+      <div class="card elevated">
         <div class="card-header">
           <h3>Recent Bookings</h3>
           <span *ngIf="loadingBookings" class="loading">Loading...</span>
@@ -208,12 +222,14 @@
             <tbody>
               <tr *ngFor="let b of bookings">
                 <td><span class="id-badge">{{ b.bookingID }}</span></td>
-                <td>{{ b.bookingDate | date }}</td>
+                <td>{{ b.bookingDate | date:'mediumDate' }}</td>
                 <td><span class="seats-badge">{{ b.numberOfSeats }}</span></td>
                 <td><span class="price-badge">₹{{ b.totalAmount }}</span></td>
               </tr>
             </tbody>
           </table>
+
+          <div *ngIf="!loadingBookings && bookings.length === 0" class="empty-state">No bookings yet.</div>
         </div>
       </div>
     </section>
@@ -222,10 +238,10 @@
 
 <!-- DESTINATION MODAL -->
 <div class="modal-overlay" [class.active]="showDestinationModal" (click)="closeDestinationModal($event)">
-  <div class="modal" (click)="$event.stopPropagation()">
+  <div class="modal" (click)="$event.stopPropagation()" role="dialog" aria-modal="true" aria-label="Destination modal">
     <div class="modal-header">
       <h2>{{ editingDestinationId ? 'Edit Destination' : 'Add New Destination' }}</h2>
-      <button class="modal-close" (click)="closeDestinationModal($event)">&times;</button>
+      <button class="modal-close" (click)="closeDestinationModal($event)" aria-label="Close">&times;</button>
     </div>
     <div class="modal-body">
       <form (ngSubmit)="onSubmitDestinationForm()">
@@ -257,11 +273,12 @@
 
 <!-- PACKAGE MODAL -->
 <div class="modal-overlay" [class.active]="showPackageModal" (click)="closePackageModal($event)">
-  <div class="modal" (click)="$event.stopPropagation()">
+  <div class="modal" (click)="$event.stopPropagation()" role="dialog" aria-modal="true" aria-label="Package modal">
     <div class="modal-header">
       <h2>{{ editingPackageId ? 'Edit Package' : 'Add New Package' }}</h2>
-      <button class="modal-close" (click)="closePackageModal($event)">&times;</button>
+      <button class="modal-close" (click)="closePackageModal($event)" aria-label="Close">&times;</button>
     </div>
+
     <div class="modal-body">
       <form (ngSubmit)="onSubmitPackageForm()">
         <div class="form-row">
@@ -275,12 +292,14 @@
             <input type="text" class="form-input" [(ngModel)]="packageForm.packageName" name="packageName" placeholder="e.g., 7 Days Goa Explore" required>
           </div>
         </div>
+
         <div class="form-row">
           <div class="form-group full-width">
             <label class="form-label">Description</label>
             <textarea class="form-textarea" [(ngModel)]="packageForm.description" name="description" placeholder="Short description of the package..." rows="3"></textarea>
           </div>
         </div>
+
         <div class="form-row">
           <div class="form-group">
             <label class="form-label required">Cost (₹)</label>
@@ -292,19 +311,67 @@
             <span class="form-hint">{{ editingPackageId ? 'Leave empty to keep current image' : 'Upload a featured image' }}</span>
           </div>
         </div>
+
+        <!-- MULTI-SELECT -->
         <div class="form-row">
           <div class="form-group full-width">
-            <label class="form-label">Select Destinations</label>
-            <select class="form-select" multiple (change)="onDestinationSelectChange($event)" [size]="(destinations.length || 4) > 6 ? 6 : (destinations.length || 4)">
-              <option *ngFor="let d of destinations" [value]="d.destinationID" [selected]="packageForm.destinationIds.includes(d.destinationID ?? -1)">
-                {{ d.city }}, {{ d.country }}
-              </option>
-            </select>
-            <span class="form-hint">Hold Ctrl (Cmd on Mac) to select multiple destinations</span>
+            <div class="multi-select" (click)="$event.stopPropagation()">
+              <label class="form-label">Select Destinations</label>
+
+              <div class="chips-row"
+                   (click)="showDestDropdown = true"
+                   tabindex="0"
+                   role="listbox"
+                   [attr.aria-expanded]="showDestDropdown ? 'true' : 'false'">
+                <ng-container *ngIf="packageForm.destinationIds.length; else noneSelected">
+                  <span class="chip" *ngFor="let id of packageForm.destinationIds">
+                    {{ getDestinationLabel(id) }}
+                    <button type="button" class="chip-remove" (click)="toggleDestinationSelection(id); $event.stopPropagation()" aria-label="Remove">×</button>
+                  </span>
+                </ng-container>
+                <ng-template #noneSelected>
+                  <span class="text-muted small">No destinations selected</span>
+                </ng-template>
+
+                <button type="button" class="clear-all" *ngIf="packageForm.destinationIds.length" (click)="packageForm.destinationIds = []; $event.stopPropagation()">Clear</button>
+                <button type="button" class="dropdown-arrow" (click)="showDestDropdown = !showDestDropdown; $event.stopPropagation()" aria-label="Toggle destinations">▾</button>
+              </div>
+
+              <div class="dropdown" *ngIf="showDestDropdown" (click)="$event.stopPropagation()">
+                <input
+                  type="search"
+                  class="search-input"
+                  placeholder="Search destinations (city or country)…"
+                  [(ngModel)]="destinationSearchTerm"
+                  (keydown.escape)="showDestDropdown = false"
+                  autofocus
+                />
+
+                <div class="dropdown-list" *ngIf="filteredDestinations.length; else nothingFound">
+                  <label class="dest-row" *ngFor="let d of filteredDestinations">
+                    <input
+                      type="checkbox"
+                      [checked]="isDestinationSelected(d.destinationID ?? -1)"
+                      (change)="toggleDestinationSelection(d.destinationID ?? -1)"
+                    />
+                    <span class="dest-label">
+                      <strong>{{ d.city }}</strong>, <span class="text-muted">{{ d.country }}</span>
+                    </span>
+                  </label>
+                </div>
+
+                <ng-template #nothingFound>
+                  <div class="dropdown-empty">No destinations found</div>
+                </ng-template>
+              </div>
+
+              <span class="form-hint">You can search and select multiple destinations. Click outside to close.</span>
+            </div>
           </div>
         </div>
       </form>
     </div>
+
     <div class="modal-footer">
       <button class="btn-secondary" (click)="closePackageModal($event)">Cancel</button>
       <button class="btn-primary" (click)="onSubmitPackageForm()">{{ editingPackageId ? 'Update' : 'Save' }} Package</button>
@@ -314,22 +381,24 @@
 </div>
 
 <!-- PACKAGE DETAIL MODAL -->
+<<!-- PACKAGE DETAIL MODAL -->
 <div class="modal-overlay" [class.active]="editingDetailVisible" (click)="closeDetailModal($event)">
-  <div class="modal modal-large" (click)="$event.stopPropagation()">
+  <div class="modal modal-large" (click)="$event.stopPropagation()" role="dialog" aria-modal="true" aria-label="Package detail modal">
     <div class="modal-header">
       <h2>Package Detail — {{ editingPackageId }}</h2>
-      <button class="modal-close" (click)="closeDetailModal($event)">&times;</button>
+      <button class="modal-close" (click)="closeDetailModal($event)" aria-label="Close">&times;</button>
     </div>
+
     <div class="modal-body">
-      <form>
+      <form (ngSubmit)="savePackageDetail()">
         <div class="form-row">
           <div class="form-group">
             <label class="form-label">Title</label>
-            <input type="text" class="form-input" [(ngModel)]="packageDetailForm.tourTitle" name="tourTitle">
+            <input type="text" class="form-input" [(ngModel)]="packageDetailForm.tourTitle" name="tourTitle" placeholder="e.g., Romantic Goa Escape">
           </div>
           <div class="form-group">
             <label class="form-label">Location</label>
-            <input type="text" class="form-input" [(ngModel)]="packageDetailForm.location" name="location">
+            <input type="text" class="form-input" [(ngModel)]="packageDetailForm.location" name="location" placeholder="City / Area">
           </div>
         </div>
 
@@ -340,7 +409,7 @@
           </div>
           <div class="form-group">
             <label class="form-label">Price per Person (₹)</label>
-            <input type="number" class="form-input" [(ngModel)]="packageDetailForm.pricePerPerson" name="pricePerPerson">
+            <input type="number" class="form-input" [(ngModel)]="packageDetailForm.pricePerPerson" name="pricePerPerson" placeholder="e.g., 12999">
           </div>
         </div>
 
@@ -350,6 +419,7 @@
             <input type="file" class="form-file" accept="image/*" (change)="onMainImageSelected($event)">
             <span *ngIf="packageDetailForm.mainImage" class="form-hint success-hint">✓ Main image loaded</span>
           </div>
+
           <div class="form-group">
             <label class="form-label">Gallery Images</label>
             <input type="file" class="form-file" accept="image/*" multiple (change)="onGallerySelected($event)">
@@ -360,7 +430,7 @@
         <div class="form-row">
           <div class="form-group full-width">
             <label class="form-label">Overview</label>
-            <textarea class="form-textarea" [(ngModel)]="packageDetailForm.overviewText" name="overviewText" rows="4"></textarea>
+            <textarea class="form-textarea" [(ngModel)]="packageDetailForm.overviewText" name="overviewText" rows="4" placeholder="Short overview of the tour"></textarea>
           </div>
         </div>
 
@@ -388,14 +458,14 @@
         <div class="form-row">
           <div class="form-group full-width">
             <label class="form-label">Itinerary (one per line: Day | Title | Description)</label>
-            <textarea class="form-textarea" [(ngModel)]="itineraryText" name="itineraryText" rows="3" placeholder="Day 1 | Arrival | Check-in at hotel"></textarea>
+            <textarea class="form-textarea" [(ngModel)]="itineraryText" name="itineraryText" rows="4" placeholder="Day 1 | Arrival | Check-in at hotel"></textarea>
           </div>
         </div>
 
         <div class="form-row">
           <div class="form-group full-width">
             <label class="form-label">FAQs (one per line: Question|Answer)</label>
-            <textarea class="form-textarea" [(ngModel)]="faqsText" name="faqsText" rows="3" placeholder="What is the best time to visit?|November to February"></textarea>
+            <textarea class="form-textarea" [(ngModel)]="faqsText" name="faqsText" rows="4" placeholder="What is the best time to visit?|November to February"></textarea>
           </div>
         </div>
 
@@ -406,13 +476,17 @@
             <div class="gallery-grid">
               <div class="gallery-item" *ngFor="let g of packageDetailForm.galleryImages; let i = index">
                 <img [src]="'data:image/jpeg;base64,' + g" alt="Gallery image">
-                <button type="button" class="gallery-remove" (click)="removeGalleryImage(i)">&times;</button>
+                <button type="button" class="gallery-remove" (click)="removeGalleryImage(i)" aria-label="Remove image">&times;</button>
               </div>
             </div>
           </div>
         </div>
+
+        <!-- Hidden field to bind package id when creating -->
+        <input type="hidden" [(ngModel)]="packageDetailForm.packageId" name="packageId">
       </form>
     </div>
+
     <div class="modal-footer">
       <button class="btn-secondary" (click)="closeDetailModal($event)">Cancel</button>
       <button *ngIf="detailExists" class="btn-delete" (click)="deletePackageDetail()">Delete Details</button>
@@ -420,3 +494,4 @@
     </div>
   </div>
 </div>
+

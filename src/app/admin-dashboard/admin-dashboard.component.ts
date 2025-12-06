@@ -1,5 +1,4 @@
-// src/app/admin/admin-dashboard.component.ts
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import {
   AdminService,
   Destination,
@@ -18,14 +17,14 @@ type AdminTab = 'destinations' | 'packages' | 'bookings';
   styleUrls: ['./admin-dashboard.component.css'],
 })
 export class AdminDashboardComponent implements OnInit {
-  // -------- TABS ----------
+  // TABS
   activeTab: AdminTab = 'destinations';
 
-  // -------- MODAL STATES ----------
+  // MODALS
   showDestinationModal = false;
   showPackageModal = false;
 
-  // -------- DESTINATIONS ----------
+  // DESTINATIONS
   destinations: Destination[] = [];
   loadingDestinations = false;
   editingDestinationId: number | null = null;
@@ -36,7 +35,7 @@ export class AdminDashboardComponent implements OnInit {
     description: '',
   };
 
-  // -------- PACKAGES ----------
+  // PACKAGES
   packages: PackageAdmin[] = [];
   loadingPackages = false;
   editingPackageId: string | null = null;
@@ -49,26 +48,28 @@ export class AdminDashboardComponent implements OnInit {
     destinationIds: [],
   };
 
-  // local state for package image upload
+  // image upload
   selectedPackageImageFile: File | null = null;
 
-  // -------- PACKAGE DETAIL EDITOR ----------
+  // PACKAGE DETAIL EDITOR
   editingDetailVisible = false;
   packageDetailForm: PackageDetailDto = this.emptyDetail();
   detailExists = false;
 
-  // text areas bridging arrays <-> textarea
+  // textarea bridging
   highlightsText = '';
   includesText = '';
   notIncludesText = '';
-  itineraryText = ''; // each line: Day X | Title | Description (optional)
-  faqsText = ''; // each line: Question|Answer
+  itineraryText = '';
+  faqsText = '';
 
-  // gallery base64 array
-  // (we store base64 strings in packageDetailForm.galleryImages)
-  // -------- BOOKINGS ----------
+  // bookings
   bookings: Booking[] = [];
   loadingBookings = false;
+
+  // Multi-select UI state
+  showDestDropdown = false;
+  destinationSearchTerm = '';
 
   constructor(
     private adminService: AdminService,
@@ -87,36 +88,61 @@ export class AdminDashboardComponent implements OnInit {
     this.loadBookings();
   }
 
+  // Close dropdown when clicking outside (host listener)
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(_: MouseEvent) {
+    if (this.showDestDropdown) {
+      this.showDestDropdown = false;
+    }
+  }
+
+  // TAB
   setTab(tab: AdminTab) {
     this.activeTab = tab;
     if (tab !== 'packages') this.editingDetailVisible = false;
   }
 
   // ---------------- MODAL CONTROLS ----------------
+  private enableBodyModalLock() {
+    document.body.classList.add('modal-open');
+  }
+
+  private disableBodyModalLock() {
+    document.body.classList.remove('modal-open');
+  }
+
   openDestinationModal() {
     this.resetDestinationForm();
     this.showDestinationModal = true;
+    this.enableBodyModalLock();
   }
 
   closeDestinationModal(event?: Event) {
     if (event) event.preventDefault();
     this.showDestinationModal = false;
     this.resetDestinationForm();
+    if (!this.showPackageModal && !this.editingDetailVisible)
+      this.disableBodyModalLock();
   }
 
   openPackageModal() {
     this.resetPackageForm();
     this.showPackageModal = true;
+    this.enableBodyModalLock();
   }
 
   closePackageModal(event?: Event) {
     if (event) event.preventDefault();
     this.showPackageModal = false;
+    if (!this.showDestinationModal && !this.editingDetailVisible)
+      this.disableBodyModalLock();
   }
 
   closeDetailModal(event?: Event) {
     if (event) event.preventDefault();
     this.editingDetailVisible = false;
+    if (!this.showPackageModal && !this.showDestinationModal)
+      this.disableBodyModalLock();
   }
 
   // ---------------- DESTINATIONS ----------------
@@ -148,6 +174,7 @@ export class AdminDashboardComponent implements OnInit {
       description: dest.description,
     };
     this.showDestinationModal = true;
+    this.enableBodyModalLock();
   }
 
   onDeleteDestination(dest: Destination) {
@@ -164,7 +191,7 @@ export class AdminDashboardComponent implements OnInit {
       alert('Country and City are required.');
       return;
     }
-    const { destinationID, ...payload } = this.destinationForm;
+    const { destinationID, ...payload } = this.destinationForm as any;
     if (this.editingDestinationId) {
       this.adminService
         .updateDestination(this.editingDestinationId, payload)
@@ -230,6 +257,7 @@ export class AdminDashboardComponent implements OnInit {
     };
     this.selectedPackageImageFile = null;
     this.showPackageModal = true;
+    this.enableBodyModalLock();
     this.editingDetailVisible = false;
     this.packageDetailForm = this.emptyDetail();
     this.detailExists = false;
@@ -250,14 +278,13 @@ export class AdminDashboardComponent implements OnInit {
     this.selectedPackageImageFile = file;
   }
 
-  // This method creates or updates a package. After create it opens the detail editor.
+  // CREATE or UPDATE package
   onSubmitPackageForm() {
     if (!this.packageForm.packageID || !this.packageForm.packageName) {
       alert('Package ID and Name are required.');
       return;
     }
 
-    // CREATE new package
     if (!this.editingPackageId) {
       this.adminService
         .createPackage(
@@ -266,10 +293,7 @@ export class AdminDashboardComponent implements OnInit {
         )
         .subscribe({
           next: (createdPkg) => {
-            // refresh list
             this.loadPackages();
-
-            // set editing state and update form with returned values
             this.editingPackageId = createdPkg.packageID;
             this.packageForm = {
               packageID: createdPkg.packageID,
@@ -281,8 +305,6 @@ export class AdminDashboardComponent implements OnInit {
               imageUrl: createdPkg.imageUrl,
             };
             this.selectedPackageImageFile = null;
-
-            // Close package modal and open detail editor
             this.showPackageModal = false;
             this.editingDetailVisible = true;
             this.loadPackageDetail(this.editingPackageId);
@@ -296,7 +318,7 @@ export class AdminDashboardComponent implements OnInit {
       return;
     }
 
-    // UPDATE existing package
+    // UPDATE
     this.adminService
       .updatePackage(
         this.editingPackageId as string,
@@ -317,6 +339,7 @@ export class AdminDashboardComponent implements OnInit {
           };
           this.selectedPackageImageFile = null;
           this.showPackageModal = false;
+          this.disableBodyModalLockIfNoOpen();
           alert('Package updated successfully!');
         },
         error: (err) => {
@@ -324,6 +347,16 @@ export class AdminDashboardComponent implements OnInit {
           alert('Failed to update package. See console for details.');
         },
       });
+  }
+
+  private disableBodyModalLockIfNoOpen() {
+    if (
+      !this.showPackageModal &&
+      !this.showDestinationModal &&
+      !this.editingDetailVisible
+    ) {
+      this.disableBodyModalLock();
+    }
   }
 
   onDestinationSelectChange(event: Event) {
@@ -373,6 +406,7 @@ export class AdminDashboardComponent implements OnInit {
     }
     this.showPackageModal = false;
     this.editingDetailVisible = true;
+    this.enableBodyModalLock();
     this.loadPackageDetail(this.editingPackageId);
   }
 
@@ -381,25 +415,19 @@ export class AdminDashboardComponent implements OnInit {
       next: (dto) => {
         this.packageDetailForm = { ...dto };
         this.detailExists = true;
-        // fill textarea bridging fields
         this.highlightsText = (dto.highlights ?? []).join('\n');
         this.includesText = (dto.includes ?? []).join('\n');
         this.notIncludesText = (dto.notIncludes ?? []).join('\n');
-
-        // itinerary -> join lines (Day|Title|Desc) if structured
         this.itineraryText = (dto.itinerary ?? [])
           .map(
             (d) => `${d.day ?? ''} | ${d.title ?? ''} | ${d.description ?? ''}`
           )
           .join('\n');
-
-        // faqs -> join lines "Q|A"
         this.faqsText = (dto.faqs ?? [])
           .map((f) => `${f.question ?? ''}|${f.answer ?? ''}`)
           .join('\n');
       },
       error: (err) => {
-        // start with blank
         console.warn('Package detail not found, creating blank form', err);
         this.packageDetailForm = this.emptyDetail();
         this.packageDetailForm.packageId = packageId;
@@ -471,14 +499,12 @@ export class AdminDashboardComponent implements OnInit {
       return;
     }
 
-    // sync textareas into arrays in dto
     const dto: PackageDetailDto = { ...this.packageDetailForm };
     dto.packageId = this.editingPackageId;
     dto.highlights = this.parseLines(this.highlightsText);
     dto.includes = this.parseLines(this.includesText);
     dto.notIncludes = this.parseLines(this.notIncludesText);
 
-    // itinerary parsing: "Day | Title | Description"
     dto.itinerary = this.parseLines(this.itineraryText).map((line) => {
       const parts = line.split('|').map((p) => p.trim());
       return {
@@ -488,7 +514,6 @@ export class AdminDashboardComponent implements OnInit {
       };
     });
 
-    // faqs parsing: "Question|Answer"
     dto.faqs = this.parseLines(this.faqsText).map((line) => {
       const [q, a] = line.split('|').map((p) => p.trim());
       return { question: q ?? '', answer: a ?? '' };
@@ -501,6 +526,7 @@ export class AdminDashboardComponent implements OnInit {
           next: (res) => {
             alert('Package detail updated.');
             this.editingDetailVisible = false;
+            this.disableBodyModalLockIfNoOpen();
           },
           error: (err) => {
             console.error('Error updating package detail', err);
@@ -515,6 +541,7 @@ export class AdminDashboardComponent implements OnInit {
             alert('Package detail created.');
             this.detailExists = true;
             this.editingDetailVisible = false;
+            this.disableBodyModalLockIfNoOpen();
           },
           error: (err) => {
             console.error('Error creating package detail', err);
@@ -536,6 +563,7 @@ export class AdminDashboardComponent implements OnInit {
           this.detailExists = false;
           this.editingDetailVisible = false;
           this.clearDetailTextFields();
+          this.disableBodyModalLockIfNoOpen();
         },
         error: (err) => {
           console.error('Error deleting package detail', err);
@@ -561,5 +589,41 @@ export class AdminDashboardComponent implements OnInit {
 
   logout() {
     this.auth.logout();
+  }
+
+  // ---------------- MULTI-SELECT HELPERS ----------------
+
+  // returns label for a destination id (safe: avoids complex template bindings)
+  getDestinationLabel(id: number | undefined | null) {
+    if (id === undefined || id === null) return '—';
+    const dest = this.destinations.find((d) => d.destinationID === id);
+    return dest ? `${dest.city}, ${dest.country}` : `#${id}`;
+  }
+
+  isDestinationSelected(id: number) {
+    return (this.packageForm.destinationIds ?? []).includes(id);
+  }
+
+  toggleDestinationSelection(id: number) {
+    const arr = this.packageForm.destinationIds ?? [];
+    const idx = arr.indexOf(id);
+    if (idx >= 0) {
+      arr.splice(idx, 1);
+    } else {
+      arr.push(id);
+    }
+    // ensure re-assignment for Angular change detection
+    this.packageForm.destinationIds = [...arr];
+  }
+
+  // filtered destinations based on search term
+  get filteredDestinations(): Destination[] {
+    const q = (this.destinationSearchTerm || '').trim().toLowerCase();
+    if (!q) return this.destinations;
+    return this.destinations.filter(
+      (d) =>
+        (d.city ?? '').toLowerCase().includes(q) ||
+        (d.country ?? '').toLowerCase().includes(q)
+    );
   }
 }
