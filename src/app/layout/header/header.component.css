@@ -125,14 +125,31 @@ html, body {
   white-space: nowrap;
   transition: color 0.2s ease;
 }
+/* Multi-column layout for large dropdowns */
+/* Limit dropdown height and add smooth scrolling */
+.header-nav .submenu {
+  max-height: 350px;              /* prevents dropdown from becoming too tall */
+  overflow-y: auto;               /* enables scrolling */
+  scrollbar-width: thin;          /* Firefox */
+}
+
+.header-nav .submenu::-webkit-scrollbar {
+  width: 6px;
+}
+
+.header-nav .submenu::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
 
 .header-nav .nav-btn:hover {
   color: #2f9e44;
 }
 
-.header-nav .nav-link.active {
+/* .header-nav .nav-link.active {
   color: #2f9e44;
-}
+} */
 
 .header-nav .caret {
   font-size: 1rem;
