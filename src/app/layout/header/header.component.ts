@@ -56,4 +56,5 @@ export class HeaderComponent {
       this.closeMenu();
     }
   }
+  
 }
