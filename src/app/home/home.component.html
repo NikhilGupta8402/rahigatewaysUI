@@ -77,10 +77,13 @@
             <h3>{{ pkg.title }}</h3>
             <p>{{ pkg.subtitle }}</p>
             <div class="dest-footer">
-              <span class="price"
-                >{{ pkg.priceLabel }}<small>/Person</small></span
-              >
-              <button class="btn-chip">{{ pkg.ctaLabel }}</button>
+              <div class="price-wrap">
+                <span class="starting-text">Starting from</span>
+                <span class="price"
+                  >{{ pkg.priceLabel }}<small>/Person</small></span
+                >
+              </div>
+              <!-- <button class="btn-chip">{{ pkg.ctaLabel }}</button> -->
             </div>
           </div>
         </article>
@@ -109,7 +112,11 @@
 
       <!-- Horizontal slider -->
       <div class="india-slider" #indiaSlider>
-        <article class="destination-card" *ngFor="let pkg of indiaPackages" (click)="goToPackageDetail(pkg)">
+        <article
+          class="destination-card"
+          *ngFor="let pkg of indiaPackages"
+          (click)="goToPackageDetail(pkg)"
+        >
           <div class="dest-img">
             <img [src]="pkg.imageUrl" [alt]="pkg.title" />
           </div>
@@ -117,10 +124,13 @@
             <h3>{{ pkg.title }}</h3>
             <p>{{ pkg.subtitle }}</p>
             <div class="dest-footer">
-              <span class="price"
-                >{{ pkg.priceLabel }} <small>/Person</small></span
-              >
-              <button class="btn-chip">{{ pkg.ctaLabel }}</button>
+              <div class="price-wrap">
+                <span class="starting-text">Starting from</span>
+                <span class="price"
+                  >{{ pkg.priceLabel }}<small>/Person</small></span
+                >
+              </div>
+              <!-- <button class="btn-chip">{{ pkg.ctaLabel }}</button> -->
             </div>
           </div>
         </article>

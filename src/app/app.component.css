@@ -1,5 +1,12 @@
 .app-main {
   min-height: 100vh;
-  padding-top: 100px;   /* header height *//* footer height – adjust if needed */
+  padding-top: 80px; /* header height */ /* footer height – adjust if needed */
   background: #ffffff;
+}
+/* Mobile footer adjustments */
+@media (max-width: 600px) {
+  .app-main {
+    padding-top: 60px;
+    padding-bottom: 30px;
+  }
 }

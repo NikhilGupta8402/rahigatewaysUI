@@ -13,54 +13,154 @@
     </div>
 
     <!-- Center: nav (desktop) -->
-    <!-- <nav class="header-nav">
-      <a class="nav-link active" href="#">Home</a>
-      <a class="nav-link" href="#">About Us</a>
-      <a class="nav-link" href="#">Activities</a>
-      <a class="nav-link" href="#">Contact</a>
-    </nav> -->
+    <nav class="header-nav" aria-label="Primary">
+      <ul class="nav-list">
+        <!-- International Trips -->
+        <li class="nav-item has-submenu" [class.open]="openDesktopIndex === 0">
+          <a class="nav-btn nav-link active" href="#" (click)="toggleDesktopSubmenu(0, $event)" tabindex="0" [attr.aria-expanded]="openDesktopIndex === 0">
+            International Trips
+            <i class="ri-arrow-down-s-line caret" aria-hidden="true"></i>
+          </a>
+          <div class="submenu" role="menu" aria-label="International Trips submenu">
+            <a class="submenu-item" href="#">Europe</a>
+            <a class="submenu-item" href="#">South East Asia</a>
+            <a class="submenu-item" href="#">Middle East</a>
+            <a class="submenu-item" href="#">Africa</a>
+            <a class="submenu-item" href="#">USA & Canada</a>
+          </div>
+        </li>
 
-    <!-- Right: WhatsApp + hamburger -->
+        <!-- India Trips -->
+        <li class="nav-item has-submenu" [class.open]="openDesktopIndex === 1">
+          <a class="nav-btn nav-link" href="#" (click)="toggleDesktopSubmenu(1, $event)" tabindex="0" [attr.aria-expanded]="openDesktopIndex === 1">
+            India Trips
+            <i class="ri-arrow-down-s-line caret" aria-hidden="true"></i>
+          </a>
+          <div class="submenu" role="menu" aria-label="India Trips submenu">
+            <a class="submenu-item" href="#">Himalayan Trips</a>
+            <a class="submenu-item" href="#">South India</a>
+            <a class="submenu-item" href="#">Rajasthan</a>
+            <a class="submenu-item" href="#">Beaches</a>
+            <a class="submenu-item" href="#">Northeast India</a>
+          </div>
+        </li>
+
+        <!-- Group Tours -->
+        <li class="nav-item has-submenu" [class.open]="openDesktopIndex === 2">
+          <a class="nav-btn nav-link" href="#" (click)="toggleDesktopSubmenu(2, $event)" tabindex="0" [attr.aria-expanded]="openDesktopIndex === 2">
+            Group Tours
+            <i class="ri-arrow-down-s-line caret" aria-hidden="true"></i>
+          </a>
+          <div class="submenu" role="menu" aria-label="Group Tours submenu">
+            <a class="submenu-item" href="#">Family Group Tours</a>
+            <a class="submenu-item" href="#">Corporate Tours</a>
+            <a class="submenu-item" href="#">Student Tours</a>
+            <a class="submenu-item" href="#">Women-Only Tours</a>
+            <a class="submenu-item" href="#">Adventure Groups</a>
+          </div>
+        </li>
+
+        <!-- Upcoming Trips -->
+        <li class="nav-item has-submenu" [class.open]="openDesktopIndex === 3">
+          <a class="nav-btn nav-link" href="#" (click)="toggleDesktopSubmenu(3, $event)" tabindex="0" [attr.aria-expanded]="openDesktopIndex === 3">
+            Upcoming Trips
+            <i class="ri-arrow-down-s-line caret" aria-hidden="true"></i>
+          </a>
+          <div class="submenu" role="menu" aria-label="Upcoming Trips submenu">
+            <a class="submenu-item" href="#">New Year Special</a>
+            <a class="submenu-item" href="#">Long Weekends</a>
+            <a class="submenu-item" href="#">Seasonal Destinations</a>
+            <a class="submenu-item" href="#">Limited Seats</a>
+          </div>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Right: WhatsApp + Hamburger -->
     <div class="header-right">
-      <a
-        href="https://wa.me/919355909328"
-        class="whatsapp-chip"
-        target="_blank"
-      >
+      <a href="https://wa.me/919355909328" class="whatsapp-chip" target="_blank">
         <i class="ri-whatsapp-line"></i>
         <span>+91 9355909328</span>
       </a>
-
-      <!-- Hamburger (tablet + mobile) -->
-      <!-- <button class="menu-toggle" (click)="toggleMenu()">
+      <button class="menu-toggle" (click)="toggleMenu()" [attr.aria-expanded]="isMenuOpen" aria-label="Toggle menu">
         <i class="ri-menu-line" *ngIf="!isMenuOpen"></i>
         <i class="ri-close-line" *ngIf="isMenuOpen"></i>
-      </button> -->
+      </button>
     </div>
   </div>
 
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" [class.open]="isMenuOpen">
+    <nav class="mobile-nav" aria-label="Mobile navigation">
+      <ul class="mobile-nav-list">
+        <!-- International Trips -->
+        <li class="mobile-nav-item">
+          <button class="mobile-nav-btn" (click)="toggleMobileSubmenu(0, $event)" [attr.aria-expanded]="openMobileIndex === 0">
+            International Trips
+            <i class="ri-arrow-down-s-line caret" [class.rotated]="openMobileIndex === 0"></i>
+          </button>
+          <div class="mobile-submenu" [class.open]="openMobileIndex === 0">
+            <a class="mobile-submenu-item" href="#" (click)="closeMenu()">Europe</a>
+            <a class="mobile-submenu-item" href="#" (click)="closeMenu()">South East Asia</a>
+            <a class="mobile-submenu-item" href="#" (click)="closeMenu()">Middle East</a>
+            <a class="mobile-submenu-item" href="#" (click)="closeMenu()">Africa</a>
+            <a class="mobile-submenu-item" href="#" (click)="closeMenu()">USA & Canada</a>
+          </div>
+        </li>
+
+        <!-- India Trips -->
+        <li class="mobile-nav-item">
+          <button class="mobile-nav-btn" (click)="toggleMobileSubmenu(1, $event)" [attr.aria-expanded]="openMobileIndex === 1">
+            India Trips
+            <i class="ri-arrow-down-s-line caret" [class.rotated]="openMobileIndex === 1"></i>
+          </button>
+          <div class="mobile-submenu" [class.open]="openMobileIndex === 1">
+            <a class="mobile-submenu-item" href="#" (click)="closeMenu()">Himalayan Trips</a>
+            <a class="mobile-submenu-item" href="#" (click)="closeMenu()">South India</a>
+            <a class="mobile-submenu-item" href="#" (click)="closeMenu()">Rajasthan</a>
+            <a class="mobile-submenu-item" href="#" (click)="closeMenu()">Beaches</a>
+            <a class="mobile-submenu-item" href="#" (click)="closeMenu()">Northeast India</a>
+          </div>
+        </li>
+
+        <!-- Group Tours -->
+        <li class="mobile-nav-item">
+          <button class="mobile-nav-btn" (click)="toggleMobileSubmenu(2, $event)" [attr.aria-expanded]="openMobileIndex === 2">
+            Group Tours
+            <i class="ri-arrow-down-s-line caret" [class.rotated]="openMobileIndex === 2"></i>
+          </button>
+          <div class="mobile-submenu" [class.open]="openMobileIndex === 2">
+            <a class="mobile-submenu-item" href="#" (click)="closeMenu()">Family Group Tours</a>
+            <a class="mobile-submenu-item" href="#" (click)="closeMenu()">Corporate Tours</a>
+            <a class="mobile-submenu-item" href="#" (click)="closeMenu()">Student Tours</a>
+            <a class="mobile-submenu-item" href="#" (click)="closeMenu()">Women-Only Tours</a>
+            <a class="mobile-submenu-item" href="#" (click)="closeMenu()">Adventure Groups</a>
+          </div>
+        </li>
+
+        <!-- Upcoming Trips -->
+        <li class="mobile-nav-item">
+          <button class="mobile-nav-btn" (click)="toggleMobileSubmenu(3, $event)" [attr.aria-expanded]="openMobileIndex === 3">
+            Upcoming Trips
+            <i class="ri-arrow-down-s-line caret" [class.rotated]="openMobileIndex === 3"></i>
+          </button>
+          <div class="mobile-submenu" [class.open]="openMobileIndex === 3">
+            <a class="mobile-submenu-item" href="#" (click)="closeMenu()">New Year Special</a>
+            <a class="mobile-submenu-item" href="#" (click)="closeMenu()">Long Weekends</a>
+            <a class="mobile-submenu-item" href="#" (click)="closeMenu()">Seasonal Destinations</a>
+            <a class="mobile-submenu-item" href="#" (click)="closeMenu()">Limited Seats</a>
+          </div>
+        </li>
+      </ul>
+
+      <!-- Mobile WhatsApp (full width) -->
+      <a href="https://wa.me/919355909328" class="mobile-whatsapp-btn" target="_blank" (click)="closeMenu()">
+        <i class="ri-whatsapp-line"></i>
+        <span>Contact on WhatsApp</span>
+      </a>
+    </nav>
+  </div>
+
   <!-- Backdrop -->
-  <div
-    class="mobile-menu-backdrop"
-    *ngIf="isMenuOpen"
-    (click)="closeMenu()"
-  ></div>
-
-  <!-- Mobile dropdown (full width) -->
-  <!-- <nav class="mobile-menu" [class.open]="isMenuOpen">
-    <a class="mobile-link active" href="#" (click)="closeMenu()">Home</a>
-    <a class="mobile-link" href="#" (click)="closeMenu()">About Us</a>
-    <a class="mobile-link" href="#" (click)="closeMenu()">Activities</a>
-    <a class="mobile-link" href="#" (click)="closeMenu()">Contact</a>
-
-    <a
-      href="https://wa.me/919981231212"
-      class="mobile-whatsapp"
-      target="_blank"
-      (click)="closeMenu()"
-    >
-      <i class="ri-whatsapp-line"></i>
-      <span>WhatsApp Us</span>
-    </a>
-  </nav> -->
+  <div class="mobile-menu-backdrop" *ngIf="isMenuOpen" (click)="closeMenu()"></div>
 </header>

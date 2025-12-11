@@ -384,7 +384,7 @@ body {
   flex-direction: column;
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
   transition: background 0.3s ease, box-shadow 0.3s ease;
-  height: 400px;
+  height: 370px;
   width: 300px;
 }
 
@@ -436,7 +436,7 @@ body {
   font-weight: 650;
   line-height: 1.2;
   color: #173405;
-  margin: 1.5rem 0 0;
+  margin:0;
 }
 
 .dest-body p {
@@ -449,7 +449,7 @@ body {
 
 /* Price + button row */
 .dest-footer {
-  margin-top: 12px;
+  margin-top: 8px;
   padding: 4px 4px 0;
   display: flex;
   align-items: center;
@@ -472,6 +472,18 @@ body {
   font-weight: 400;
   color: #757575;
 }
+.price-wrap {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.starting-text {
+  font-size: 13px;
+  color: #757575;
+  margin-bottom: 2px;
+}
+
 
 /* Book Now button */
 .destination-card .btn-chip {
@@ -1982,7 +1994,6 @@ body {
   .dest-body p {
     font-size: 0.85rem;
   }
-
   .dest-footer .price {
     font-size: 1.1rem;
   }
@@ -2041,7 +2052,7 @@ body {
   .india-slider .destination-card {
     min-width: 240px;
     max-width: 260px;
-    height: 340px;
+    height: 320px;
   }
 
   .dest-img {
