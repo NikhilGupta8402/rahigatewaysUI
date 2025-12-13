@@ -345,4 +345,8 @@ export class HomeComponent implements AfterViewInit {
     // later you can pass an id/slug; for now just navigate
     this.router.navigate(['/tour', 'goa-7-days']);
   }
+
+  explorePackage() {
+    this.router.navigate(['/explore-packages']);
+  }
 }

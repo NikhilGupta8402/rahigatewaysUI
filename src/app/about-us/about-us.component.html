@@ -1,0 +1,209 @@
+<div class="about-us-container">
+  <!-- Hero Section -->
+<section class="hero-section">
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+    <div class="hero-text">
+      <h1 class="hero-title">About Us</h1>
+      <p class="hero-description">
+        At Rahi Gateways, we are dedicated to developing creative new technologies and solutions that transform the traveling experience of businesses everywhere.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+  <!-- Journey Section -->
+  <section class="journey-section">
+    <div class="journey-content">
+      <div class="journey-image">
+        <img src="assets/images/our-journey.png" alt="Our journey" class="journey-img">
+      </div>
+      <div class="journey-text">
+        <h2 class="section-title">Our Journey: Driven by Passion</h2>
+        <p class="section-description">
+          Remember the days when our wanderlust was crushed in
+          what the web offered us — browsing on navigation
+          sites, searching endlessly for information? We do!
+        </p>
+        <p class="section-description">
+          That's traveling the world, creating experiences, and
+          helping customers view technology that became a
+          reality. Those days sparked an idea—what if there's a
+          career in anything that allows you to create value, solve
+          problems and grow while being close to your family. That's
+          how Rahi Gateways was born.
+        </p>
+        <p class="section-description">
+          From humble beginnings, Rahi Gateways has grown into
+          a trusted partner for explorers worldwide. Our story is
+          shaped by a passion for travel, a fascination with
+          networking a travel organization fueled by a deep
+          understanding of diverse cultures and a compassionate
+          heart.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vision & Mission Section -->
+  <section class="vision-section">
+    <div class="vision-content">
+      <div class="vision-text">
+        <h2 class="section-title">Our Vision & Mission</h2>
+        <p class="section-description">
+          To become India's most trusted and innovative travel
+          partner by delivering best-in-class networks and
+          remarkable experiences across the globe. Our mission is
+          to not just sell experiences in different journey by building
+          a meaningful connection with the world. We aim to be
+          counted with every traveler's spirit of adventure.
+        </p>
+        <ul class="vision-list">
+          <li *ngFor="let item of visionItems" class="vision-item">
+            <svg class="check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M9 12l2 2 4-4"/>
+            </svg>
+            <span>{{ item.text }}</span>
+          </li>
+        </ul>
+      </div>
+      <div class="vision-image">
+        <img src="assets/images/our-vision.png" alt="Our vision" class="vision-img">
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Values Section -->
+  <section class="values-section">
+    <div class="values-header">
+      <h2 class="section-title">Our Core Values</h2>
+      <p class="section-subtitle">
+        These principles guide our every decision and interaction with clients, ensuring we
+        always deliver the best of our ethos.
+      </p>
+    </div>
+    <div class="values-grid">
+      <div *ngFor="let value of coreValues" class="value-card">
+        <div class="value-icon">
+          <svg *ngIf="value.icon === 'heart'" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+          </svg>
+          <svg *ngIf="value.icon === 'lightbulb'" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 18h6M10 22h4M15 8a3 3 0 1 0-6 0c0 2 3 3 3 7"/>
+            <line x1="12" y1="2" x2="12" y2="3"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+            <line x1="19.78" y1="4.22" x2="18.36" y2="5.64"/>
+          </svg>
+          <svg *ngIf="value.icon === 'users'" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+          <svg *ngIf="value.icon === 'award'" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="8" r="7"/>
+            <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>
+          </svg>
+          <svg *ngIf="value.icon === 'globe'" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="2" y1="12" x2="22" y2="12"/>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          </svg>
+          <svg *ngIf="value.icon === 'shield'" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+        </div>
+        <h3 class="value-title">{{ value.title }}</h3>
+        <p class="value-description">{{ value.description }}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="team-section">
+    <div class="team-header" style="text-align: center;">
+      <h2 class="section-title">Meet Our Dedicated Team</h2>
+      <p class="section-subtitle">
+        The passionate individuals who make your travel dreams a reality, consistently
+        fierce and resilient.
+      </p>
+    </div>
+    <div class="team-grid">
+      <div *ngFor="let member of teamMembers" class="team-card">
+        <div class="team-image-wrapper">
+          <img [src]="member.image" [alt]="member.name" class="team-image">
+        </div>
+        <h3 class="team-name">{{ member.name }}</h3>
+        <p class="team-role">{{ member.role }}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Milestones Section -->
+  <section class="milestones-section">
+    <div class="milestones-header">
+      <h2 class="section-title">Our Milestones & Achievements</h2>
+      <p class="section-subtitle">
+        A monument to our dedication, trust, and unrivaled service in the travel
+        industry.
+      </p>
+    </div>
+    <div class="milestones-grid">
+      <div *ngFor="let milestone of milestones" class="milestone-card">
+        <div class="milestone-icon">
+          <svg *ngIf="milestone.icon === 'star'" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+          </svg>
+          <svg *ngIf="milestone.icon === 'map'" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/>
+            <line x1="8" y1="2" x2="8" y2="18"/>
+            <line x1="16" y1="6" x2="16" y2="22"/>
+          </svg>
+          <svg *ngIf="milestone.icon === 'users'" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+          <svg *ngIf="milestone.icon === 'trophy'" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
+            <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
+            <path d="M4 22h16"/>
+            <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
+            <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
+            <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>
+          </svg>
+        </div>
+        <div class="milestone-value">{{ milestone.value }}</div>
+        <div class="milestone-label">{{ milestone.label }}</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section
+  <section class="faq-section">
+    <div class="faq-header">
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      <p class="section-subtitle">
+        Find quick answers to the most common questions about Rahi Gateways and
+        our services.
+      </p>
+    </div>
+    <div class="faq-list">
+      <div *ngFor="let faq of faqs; let i = index" class="faq-item" [class.open]="faq.isOpen">
+        <button class="faq-question" (click)="toggleFAQ(i)">
+          <span>{{ faq.question }}</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </button>
+        <div class="faq-answer" *ngIf="faq.isOpen">
+          <p>{{ faq.answer }}</p>
+        </div>
+      </div>
+    </div>
+  </section> -->
+</div>

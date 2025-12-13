@@ -1,0 +1,141 @@
+<!-- src/app/explore-package/explore-package.component.html -->
+<div class="explore-page">
+  <div class="inner-container">
+    <div class="explore-header">
+    </div>
+
+    <!-- SEARCH BAR TOP -->
+    <div class="search-box">
+      <i class="ri-search-line" aria-hidden="true"></i>
+      <input
+        type="text"
+        placeholder="Search packages..."
+        [(ngModel)]="searchQuery"
+        aria-label="Search packages"
+      />
+    </div>
+
+    <div class="explore-container">
+      <!-- LEFT FILTERS -->
+      <aside class="filters-card" aria-label="Filters">
+        <h3>Filters</h3>
+
+        <!-- CATEGORY FILTER -->
+        <div class="filter-section">
+          <h4>Category</h4>
+          <label *ngFor="let c of allCategories">
+            <input
+              type="checkbox"
+              [checked]="selectedCategories.includes(c)"
+              (change)="toggleCategory(c, $event)"
+            />
+            {{ c }}
+          </label>
+        </div>
+
+        <!-- PRICE FILTER -->
+        <div class="filter-section">
+          <h4>Max Price</h4>
+          <input
+            type="range"
+            min="0"
+            max="500000"
+            [(ngModel)]="maxPrice"
+            aria-label="Max price"
+          />
+          <p>₹{{ maxPrice | number }}</p>
+        </div>
+
+        <!-- DURATION FILTER -->
+        <div class="filter-section">
+          <h4>Duration (Days)</h4>
+          <label
+            ><input
+              type="radio"
+              name="duration"
+              value="all"
+              [(ngModel)]="selectedDuration"
+            />
+            All</label
+          >
+          <label
+            ><input
+              type="radio"
+              name="duration"
+              value="1-3"
+              [(ngModel)]="selectedDuration"
+            />
+            1–3 Days</label
+          >
+          <label
+            ><input
+              type="radio"
+              name="duration"
+              value="4-7"
+              [(ngModel)]="selectedDuration"
+            />
+            4–7 Days</label
+          >
+          <label
+            ><input
+              type="radio"
+              name="duration"
+              value="8+"
+              [(ngModel)]="selectedDuration"
+            />
+            8+ Days</label
+          >
+        </div>
+      </aside>
+
+      <!-- RIGHT SIDE -->
+      <section class="packages-section">
+        <div class="header-row">
+          <p>Showing {{ filteredPackages.length }} packages</p>
+
+          <select aria-label="Sort packages">
+            <option>Most Popular</option>
+            <option>Price: Low to High</option>
+            <option>Price: High to Low</option>
+          </select>
+        </div>
+
+        <div class="cards-grid">
+          <article class="destination-card" *ngFor="let p of filteredPackages">
+            <div class="dest-img" role="img" [attr.aria-label]="p.title">
+              <img [src]="p.imageUrl" [alt]="p.title" />
+            </div>
+
+            <div class="dest-body">
+              <h3>{{ p.title }}</h3>
+              <p>{{ p.description }}</p>
+
+              <div class="dest-footer">
+                <div>
+                  <span class="price"
+                    >₹{{ p.price | number }}<small>/Person</small></span
+                  >
+                  <div
+                    class="card-meta"
+                    style="margin-top: 6px; font-size: 14px; color: #757575"
+                  >
+                    <!-- <span>📍 {{ p.location }}</span>
+                    <span style="margin-left: 12px">📅 {{ p.days }} Days</span> -->
+                  </div>
+                </div>
+
+                <button
+                  class="btn-chip"
+                  (click)="onBook(p)"
+                  [attr.aria-label]="'Book ' + p.title"
+                >
+                  Book Now
+                </button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>

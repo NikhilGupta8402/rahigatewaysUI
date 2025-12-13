@@ -1,0 +1,330 @@
+/* ================================ */
+/* PRIVACY PAGE - TOUR-STYLE CARD CSS */
+/* ================================ */
+
+.privacy-container {
+  max-width: 1400px;
+  margin: auto;
+  padding: 20px 15px;
+}
+
+/* HERO */
+.privacy-hero {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.page-title {
+  font-size: 38px;
+  font-weight: 700;
+  margin-bottom: 5px;
+  font-family: "Poppins";
+}
+
+.subtitle {
+  color: var(--text-muted);
+}
+
+/* Separator */
+.separator {
+  height: 4px;
+  width: 100%;
+  background: var(--primary);
+  margin: 25px 0 40px;
+}
+
+/* Last Updated Box */
+.updated-box {
+  background: var(--bg-soft);
+  padding: 20px;
+  border-radius: 12px;
+  display: flex;
+  gap: 15px;
+  border-left: 5px solid var(--primary);
+  align-items: flex-start;
+  margin-bottom: 40px;
+}
+
+.updated-icon i {
+  font-size: 28px;
+  color: var(--primary);
+}
+
+/* Sections */
+.section {
+  margin-bottom: 50px;
+}
+
+.section h2 {
+  font-size: 26px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section i {
+  font-size: 26px;
+  color: var(--primary);
+}
+
+/* Grids */
+.three-grid,
+.two-grid {
+  display: grid;
+  gap: 25px;
+  margin-top: 25px;
+}
+
+.three-grid {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.two-grid {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+/* ========================= */
+/* TOUR-STYLE CARD BASE       */
+/* ========================= */
+
+.card,
+.security-card,
+.rights-item,
+.card.light {
+  background: #ffffff;
+  border-radius: 18px; /* rounded like tour cards */
+  border: 1px solid #f1f5f9; /* soft border */
+  padding: 20px 24px;
+  box-shadow: 0 6px 14px rgba(15, 23, 42, 0.04);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  position: relative;
+  overflow: hidden;
+  animation: popIn 0.4s ease forwards;
+}
+
+/* Glow border animation */
+.card::before,
+.security-card::before,
+.rights-item::before,
+.card.light::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: var(--bg-soft);
+  z-index: -1;
+  opacity: 0;
+  transition: 0.4s ease;
+}
+
+/* Hover effect: pop + shadow + glow */
+.card:hover,
+.security-card:hover,
+.rights-item:hover,
+.card.light:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.12);
+}
+
+.card:hover::before,
+.security-card:hover::before,
+.rights-item:hover::before,
+.card.light:hover::before {
+  opacity: 1;
+}
+
+/* Card Images */
+.card img,
+.security-card img,
+.rights-item img,
+.card.light img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto 15px;
+  animation: popIn 0.6s ease;
+}
+
+/* Bigger icons for 3-grid cards */
+.three-grid .card img {
+  width: 70px;
+  height: 70px;
+}
+
+/* Card Headings */
+.card h3,
+.security-card h3,
+.rights-item h4,
+.card.light h3 {
+  margin-top: 0;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+  color: #173404; /* dark green title like tour cards */
+}
+
+/* Card Paragraphs */
+.card p,
+.security-card p,
+.rights-item p,
+.card.light p {
+  text-align: center;
+  line-height: 1.5;
+  color: #4b5563; /* text color similar to tour cards */
+}
+
+/* ========================= */
+/* FADE / POP ANIMATION       */
+/* ========================= */
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.fade {
+  animation: fadeSlideUp 0.7s ease both;
+}
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========================= */
+/* RIGHTS SECTION             */
+/* ========================= */
+.rights-section {
+  margin-top: 40px;
+  padding: 25px;
+  background: var(--bg-soft);
+  border-radius: 16px;
+  border: 1px solid var(--border-soft);
+  box-shadow: 0px 6px 16px rgba(0,0,0,0.05);
+  animation: fadeSlideUp 0.7s ease both;
+}
+
+.rights-section h2 {
+  font-size: 28px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rights-section h2 i {
+  font-size: 28px;
+  color: var(--primary);
+}
+
+.rights-intro {
+  margin-top: 10px;
+  margin-bottom: 25px;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.rights-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 22px;
+  margin-top: 10px;
+}
+
+.rights-item {
+  text-align: center;
+  transition: 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.rights-item i {
+  font-size: 32px;
+  color: var(--primary);
+  margin-bottom: 12px;
+}
+
+/* ========================= */
+/* SECURITY SECTION           */
+/* ========================= */
+.security-section {
+  margin-top: 40px;
+}
+
+.security-intro {
+  max-width: 850px;
+  margin-bottom: 25px;
+  line-height: 1.7;
+  color: var(--text-muted);
+  font-size: 16px;
+}
+
+/* Security list styling */
+.security-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 15px;
+}
+
+.security-list li {
+  margin-bottom: 14px;
+  padding-left: 28px;
+  position: relative;
+  line-height: 1.6;
+}
+
+.security-list li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  top: 2px;
+  color: var(--primary);
+  font-size: 15px;
+  font-weight: bold;
+}
+
+/* ========================= */
+/* CONTACT SECTION            */
+/* ========================= */
+.contact-section .card.light {
+  margin-top: 20px;
+}
+
+/* ========================= */
+/* RESPONSIVE IMPROVEMENTS    */
+/* ========================= */
+@media (max-width: 1024px) {
+  .three-grid,
+  .two-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-title { font-size: 32px; }
+  .card,
+  .security-card,
+  .rights-item,
+  .card.light { padding: 16px 18px; }
+}
+
+@media (max-width: 480px) {
+  .page-title { font-size: 28px; }
+  .card,
+  .security-card,
+  .rights-item,
+  .card.light { padding: 14px; border-radius: 14px; }
+}

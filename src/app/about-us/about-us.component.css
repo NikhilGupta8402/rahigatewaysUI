@@ -1,0 +1,304 @@
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* GLOBAL CONTAINER */
+.about-us-container {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, Roboto, Inter, "Helvetica Neue", Arial, sans-serif;
+  background-color: #ffffff;
+  color: #1a1a1a;
+}
+
+/* GLOBAL SECTION – tighter, balanced spacing */
+section {
+  padding: 55px 24px;
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+/* TITLES */
+.section-title {
+  font-size: 38px;
+  font-weight: 700;
+  margin-bottom: 14px;
+  text-align: center;
+}
+
+.section-subtitle {
+  font-size: 17px;
+  color: #5b6470;
+  line-height: 1.6;
+  max-width: 700px;
+  margin: 0 auto 25px auto;
+  text-align: center;
+}
+
+.section-description {
+  font-size: 17px;
+  color: #4b5563;
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+
+/* ------------------------------------------------------ */
+/* HERO SECTION — FULL WIDTH BANNER */
+/* ------------------------------------------------------ */
+
+.hero-section {
+  position: relative;
+  width: 100%;
+  height: 420px;
+  background:
+    linear-gradient(135deg, rgba(43,118,0,0.85), rgba(30,80,0,0.85)),
+    url("/assets/about/first.jpg") center/cover no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+
+  border-radius: 0;       /* remove curve */
+  margin: 0;              /* remove spacing */
+  padding: 0;             /* remove spacing */
+  max-width: 100%;        /* ensure full span */
+}
+
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.25);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 760px;
+  padding: 0 1.5rem;
+}
+
+.hero-title {
+  font-size: 48px;
+  font-weight: 800;
+  margin-bottom: 16px;
+  text-shadow: 0 0 10px rgba(0,0,0,0.45);
+}
+
+.hero-description {
+  font-size: 18px;
+  opacity: 0.95;
+  line-height: 1.55;
+  text-shadow: 0 0 10px rgba(0,0,0,0.45);
+}
+
+/* ------------------------------------------------------ */
+/* SECTION LAYOUT (JOURNEY / VISION) */
+/* ------------------------------------------------------ */
+
+.journey-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 45px;
+  align-items: center;
+  padding-right: 50px;
+}
+.vision-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 45px;
+  align-items: center;
+}
+
+.journey-section { background: rgba(43,118,0,0.03); }
+.journey-image{
+  padding-left: 50px;
+}
+/* Images */
+.vision-img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  object-position: center 45%; /* removes awkward cropping */
+  border-radius: 18px;
+  box-shadow: 0 10px 35px rgba(0,0,0,0.15);
+}
+
+/* Vision List */
+.vision-item {
+  display: flex;
+  gap: 12px;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #45505c;
+}
+
+.check-icon {
+  color: rgb(43,118,0);
+  margin-top: 2px;
+}
+
+/* ------------------------------------------------------ */
+/* CORE VALUES – Balanced layout + soft hover */
+/* ------------------------------------------------------ */
+
+.values-section { background: rgba(43,118,0,0.05); }
+
+.values-header { margin-bottom: 40px; }
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.value-card {
+  background: white;
+  padding: 32px 22px;
+  border-radius: 14px;
+  border: 1px solid #e5e7eb;
+  text-align: center;
+  transition: 0.3s ease;
+}
+
+/* SOFT GREEN INNER HIGHLIGHT */
+.value-card:hover {
+  background: #f9fef7;
+  border-color: #ffffff;
+  box-shadow: 0 6px 28px rgba(21,128,61,0.18);
+  color: #2a7601;
+}
+
+.value-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(43,118,0,0.10);
+  border-radius: 12px;
+}
+
+.value-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+/* ------------------------------------------------------ */
+/* TEAM SECTION */
+/* ------------------------------------------------------ */
+
+.team-section { text-align: center; }
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 35px;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.team-card {
+  padding: 20px;
+  border-radius: 14px;
+  transition: 0.3s ease;
+}
+
+.team-card:hover {
+  background: #f9fef7;
+  box-shadow: 0 6px 28px rgba(21,128,61,0.18);
+  color: #2a7601;
+}
+
+.team-image-wrapper {
+  width: 180px;
+  height: 180px;
+  overflow: hidden;
+  border-radius: 50%;
+  border: 4px solid rgba(43,118,0,0.15);
+}
+
+.team-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 35%; /* ensures face is centered */
+}
+
+.team-card:hover .team-image-wrapper {
+  border-color: rgb(43,118,0);
+}
+
+/* ------------------------------------------------------ */
+/* MILESTONES */
+/* ------------------------------------------------------ */
+
+.milestones-section { background: rgba(43,118,0,0.08); }
+
+.milestones-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+}
+
+.milestone-card {
+  background: white;
+  padding: 35px 20px;
+  border-radius: 14px;
+  border: 1px solid #e5e7eb;
+  text-align: center;
+  transition: 0.3s ease;
+}
+
+.milestone-card:hover {
+  background: #f9fef7;
+  border-color: #ffffff;
+  box-shadow: 0 6px 28px rgba(21,128,61,0.18);
+  color: #2a7601;
+}
+
+/* ------------------------------------------------------ */
+/* RESPONSIVE */
+/* ------------------------------------------------------ */
+
+@media (max-width: 1024px) {
+  .journey-content,
+  .vision-content {
+    grid-template-columns: 1fr;
+  }
+
+  .values-grid,
+  .milestones-grid,
+  .team-grid {
+    grid-template-columns: repeat(2,1fr);
+  }
+
+  .team-image-wrapper {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+@media (max-width: 768px) {
+  section {
+    padding: 40px 16px;
+  }
+
+  .values-grid,
+  .milestones-grid,
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-title {
+    font-size: 36px;
+  }
+}
