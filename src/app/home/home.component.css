@@ -212,7 +212,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 10px;
+  gap: 30px;
   padding: 0px 0;
   overflow-x: auto;
 }
@@ -412,7 +412,7 @@ body {
 .dest-img img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  /* object-fit: cover; */
   display: block;
   transition: transform 0.4s ease;
 }
